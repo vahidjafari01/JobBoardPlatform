@@ -1,0 +1,6 @@
+@JobBoardPlatform.Presentation_HostAddress = http://localhost:5180
+
+GET {{JobBoardPlatform.Presentation_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

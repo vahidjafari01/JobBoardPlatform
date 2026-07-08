@@ -1,0 +1,14 @@
+<Solution>
+  <Folder Name="/Business/">
+    <Project Path="JobBoardPlatfomr.Services/JobBoardPlatfomr.Services.csproj" />
+  </Folder>
+  <Folder Name="/Domain/">
+    <Project Path="JobBoardPlatform.Domain/JobBoardPlatform.Domain.csproj" />
+  </Folder>
+  <Folder Name="/Infrustructure/">
+    <Project Path="JobBoardPlatform.Infrustructure/JobBoardPlatform.Infrustructure.csproj" />
+  </Folder>
+  <Folder Name="/Presentation/">
+    <Project Path="JobBoardPlatform.Presentation/JobBoardPlatform.Presentation.csproj" />
+  </Folder>
+</Solution>
