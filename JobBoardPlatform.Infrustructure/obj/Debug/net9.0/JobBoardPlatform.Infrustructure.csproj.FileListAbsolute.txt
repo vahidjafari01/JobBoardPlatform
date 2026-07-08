@@ -15,3 +15,4 @@ C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatform.Infrustructure\ob
 C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatform.Infrustructure\obj\Debug\net9.0\JobBoardPlatform.Infrustructure.pdb
 C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatform.Infrustructure\obj\Debug\net9.0\JobBoardPlatform.Infrustructure.genruntimeconfig.cache
 C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatform.Infrustructure\obj\Debug\net9.0\ref\JobBoardPlatform.Infrustructure.dll
+C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatform.Infrustructure\obj\Debug\net9.0\JobBoardPlatform.Infrustructure.sourcelink.json

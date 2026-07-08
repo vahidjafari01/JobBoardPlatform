@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JobBoardPlatform.Infrustructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260708191448_init")]
+    [Migration("20260708195358_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -73,9 +73,9 @@ namespace JobBoardPlatform.Infrustructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Filedb64")
+                    b.Property<byte[]>("Filedb64")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<DateTime>("ModifiedAt")
                         .HasColumnType("datetime2");
@@ -357,6 +357,10 @@ namespace JobBoardPlatform.Infrustructure.Migrations
 
                     b.Property<DateTime>("ModifiedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Province")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<decimal?>("SalaryMax")
                         .HasPrecision(10, 2)

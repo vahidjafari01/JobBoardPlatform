@@ -70,9 +70,9 @@ namespace JobBoardPlatform.Infrustructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Filedb64")
+                    b.Property<byte[]>("Filedb64")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<DateTime>("ModifiedAt")
                         .HasColumnType("datetime2");

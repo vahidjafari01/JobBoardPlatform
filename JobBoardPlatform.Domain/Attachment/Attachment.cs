@@ -13,10 +13,10 @@ namespace JobBoardPlatform.Domain.Attachment
         {
             
         }
-        public Attachment(string filedb64)
+        public Attachment(byte[] filedb64)
         {
             Filedb64 = filedb64;
         }
-        public string Filedb64 { get; set; }
+        public Byte[] Filedb64 { get; set; }
     }
 }

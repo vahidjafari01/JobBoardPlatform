@@ -10,3 +10,4 @@ C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatform.Domain\obj\Debug\
 C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatform.Domain\obj\Debug\net9.0\refint\JobBoardPlatform.Domain.dll
 C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatform.Domain\obj\Debug\net9.0\JobBoardPlatform.Domain.pdb
 C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatform.Domain\obj\Debug\net9.0\ref\JobBoardPlatform.Domain.dll
+C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatform.Domain\obj\Debug\net9.0\JobBoardPlatform.Domain.sourcelink.json

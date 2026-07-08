@@ -63,7 +63,7 @@ namespace JobBoardPlatform.Infrustructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Filedb64 = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Filedb64 = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -226,6 +226,7 @@ namespace JobBoardPlatform.Infrustructure.Migrations
                     Title = table.Column<string>(type: "nvarchar(100)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(400)", nullable: false),
                     Location = table.Column<string>(type: "nvarchar(150)", nullable: true),
+                    Province = table.Column<string>(type: "nvarchar(100)", nullable: false),
                     SalaryMin = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: true),
                     SalaryMax = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: true),
                     IsFeatured = table.Column<bool>(type: "bit", nullable: false),

@@ -9,3 +9,4 @@ C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatfomr.Services\obj\Debu
 C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatfomr.Services\obj\Debug\net9.0\refint\JobBoardPlatfomr.Services.dll
 C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatfomr.Services\obj\Debug\net9.0\JobBoardPlatfomr.Services.pdb
 C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatfomr.Services\obj\Debug\net9.0\ref\JobBoardPlatfomr.Services.dll
+C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatfomr.Services\obj\Debug\net9.0\JobBoardPlatfomr.Services.sourcelink.json
