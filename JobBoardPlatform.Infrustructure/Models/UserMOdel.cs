@@ -25,6 +25,7 @@ namespace JobBoardPlatform.Infrustructure.Models
             builder.Property(u => u.LastName).HasColumnType("nvarchar(30)");
 
 
+
         }
     }
 }
