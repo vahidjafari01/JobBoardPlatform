@@ -22,7 +22,7 @@ namespace JobBoardPlatform.Presentation.Controllers
         }
 
         [HttpPost]
-        [Authorize(policy: "EmployerOrAdmin")]
+        [Authorize(Roles ="Employer")]
 
         public async Task<ActionResult<BaseResponseDto>> CreateJobAd([FromBody] CreateJobAdCommand cmd)
         {
