@@ -13,7 +13,7 @@ namespace JobBoardPlatform.Infrustructure.Models
     {
         public void Configure(EntityTypeBuilder<Application> builder)
         {
-            builder.Property(a => a.Note).HasColumnType("nvarchar(200)");
+            builder.Property(a => a.NoteWritenByUser).HasColumnType("nvarchar(200)");
 
         }
     }

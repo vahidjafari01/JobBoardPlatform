@@ -22,6 +22,35 @@ namespace JobBoardPlatform.Infrustructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("JobBoardPlatform.Domain.Abstractions.Attach", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ContentType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Filedb64")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<DateTime>("ModifiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Attachs");
+                });
+
             modelBuilder.Entity("JobBoardPlatform.Domain.Applications.Application", b =>
                 {
                     b.Property<Guid>("Id")
@@ -40,7 +69,7 @@ namespace JobBoardPlatform.Infrustructure.Migrations
                     b.Property<DateTime>("ModifiedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Note")
+                    b.Property<string>("NoteWritenByUser")
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<DateTime?>("ReviewedAt")
@@ -61,7 +90,7 @@ namespace JobBoardPlatform.Infrustructure.Migrations
                     b.ToTable("Applications");
                 });
 
-            modelBuilder.Entity("JobBoardPlatform.Domain.Attachment.Attachment", b =>
+            modelBuilder.Entity("JobBoardPlatform.Domain.Cities.City", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -70,22 +99,30 @@ namespace JobBoardPlatform.Infrustructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<byte[]>("Filedb64")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)");
-
                     b.Property<DateTime>("ModifiedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("ProvinceId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Attachments");
+                    b.HasIndex("ProvinceId");
+
+                    b.ToTable("Cities");
                 });
 
             modelBuilder.Entity("JobBoardPlatform.Domain.Companies.Company", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CityId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
@@ -95,7 +132,7 @@ namespace JobBoardPlatform.Infrustructure.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<bool>("IsActive")
+                    b.Property<bool>("IsApproved")
                         .HasColumnType("bit");
 
                     b.Property<string>("Location")
@@ -122,6 +159,10 @@ namespace JobBoardPlatform.Infrustructure.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CityId");
+
+                    b.HasIndex("LogoId");
 
                     b.HasIndex("UserId")
                         .IsUnique();
@@ -152,6 +193,35 @@ namespace JobBoardPlatform.Infrustructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("JobCategories");
+                });
+
+            modelBuilder.Entity("JobBoardPlatform.Domain.Notifications.Notification", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ModifiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Notifications");
                 });
 
             modelBuilder.Entity("JobBoardPlatform.Domain.Payments.Payment", b =>
@@ -192,6 +262,27 @@ namespace JobBoardPlatform.Infrustructure.Migrations
                     b.HasIndex("JobAdId");
 
                     b.ToTable("Payments");
+                });
+
+            modelBuilder.Entity("JobBoardPlatform.Domain.Provinces.Province", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ModifiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Provinces");
                 });
 
             modelBuilder.Entity("JobBoardPlatform.Domain.Users.RoleEntity", b =>
@@ -320,6 +411,9 @@ namespace JobBoardPlatform.Infrustructure.Migrations
                     b.Property<Guid?>("ProfilePhotoId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("ResumeId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -340,6 +434,8 @@ namespace JobBoardPlatform.Infrustructure.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
+                    b.HasIndex("ProfilePhotoId");
+
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
@@ -350,6 +446,9 @@ namespace JobBoardPlatform.Infrustructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("CategoryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CityId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("CompanyId")
@@ -364,6 +463,9 @@ namespace JobBoardPlatform.Infrustructure.Migrations
 
                     b.Property<int>("EmployementType")
                         .HasColumnType("int");
+
+                    b.Property<TimeSpan>("EndWorkTIme")
+                        .HasColumnType("time");
 
                     b.Property<int>("FeaturePriority")
                         .HasColumnType("int");
@@ -380,10 +482,6 @@ namespace JobBoardPlatform.Infrustructure.Migrations
                     b.Property<DateTime>("ModifiedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Province")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(100)");
-
                     b.Property<decimal?>("SalaryMax")
                         .HasPrecision(10, 2)
                         .HasColumnType("decimal(10,2)");
@@ -391,6 +489,12 @@ namespace JobBoardPlatform.Infrustructure.Migrations
                     b.Property<decimal?>("SalaryMin")
                         .HasPrecision(10, 2)
                         .HasColumnType("decimal(10,2)");
+
+                    b.PrimitiveCollection<string>("Skils")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<TimeSpan>("StartWorkTime")
+                        .HasColumnType("time");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
@@ -402,6 +506,8 @@ namespace JobBoardPlatform.Infrustructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("CityId");
 
                     b.HasIndex("CompanyId");
 
@@ -530,13 +636,34 @@ namespace JobBoardPlatform.Infrustructure.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("JobBoardPlatform.Domain.Cities.City", b =>
+                {
+                    b.HasOne("JobBoardPlatform.Domain.Provinces.Province", null)
+                        .WithMany("Cities")
+                        .HasForeignKey("ProvinceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("JobBoardPlatform.Domain.Companies.Company", b =>
                 {
+                    b.HasOne("JobBoardPlatform.Domain.Cities.City", null)
+                        .WithMany("Companies")
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("JobBoardPlatform.Domain.Abstractions.Attach", "Logo")
+                        .WithMany()
+                        .HasForeignKey("LogoId");
+
                     b.HasOne("JobBoardPlatform.Domain.Users.User", "Owner")
                         .WithOne("Company")
                         .HasForeignKey("JobBoardPlatform.Domain.Companies.Company", "UserId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.Navigation("Logo");
 
                     b.Navigation("Owner");
                 });
@@ -552,12 +679,27 @@ namespace JobBoardPlatform.Infrustructure.Migrations
                     b.Navigation("JobAd");
                 });
 
+            modelBuilder.Entity("JobBoardPlatform.Domain.Users.User", b =>
+                {
+                    b.HasOne("JobBoardPlatform.Domain.Abstractions.Attach", "ProfilePhoto")
+                        .WithMany()
+                        .HasForeignKey("ProfilePhotoId");
+
+                    b.Navigation("ProfilePhoto");
+                });
+
             modelBuilder.Entity("JobBoardPlatform.Domain.entities.JobAd", b =>
                 {
                     b.HasOne("JobBoardPlatform.Domain.JobCategories.JobCategory", "Category")
                         .WithMany("JobAds")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("JobBoardPlatform.Domain.Cities.City", null)
+                        .WithMany("JobAds")
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("JobBoardPlatform.Domain.Companies.Company", "Company")
@@ -622,6 +764,13 @@ namespace JobBoardPlatform.Infrustructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("JobBoardPlatform.Domain.Cities.City", b =>
+                {
+                    b.Navigation("Companies");
+
+                    b.Navigation("JobAds");
+                });
+
             modelBuilder.Entity("JobBoardPlatform.Domain.Companies.Company", b =>
                 {
                     b.Navigation("JobAds");
@@ -630,6 +779,11 @@ namespace JobBoardPlatform.Infrustructure.Migrations
             modelBuilder.Entity("JobBoardPlatform.Domain.JobCategories.JobCategory", b =>
                 {
                     b.Navigation("JobAds");
+                });
+
+            modelBuilder.Entity("JobBoardPlatform.Domain.Provinces.Province", b =>
+                {
+                    b.Navigation("Cities");
                 });
 
             modelBuilder.Entity("JobBoardPlatform.Domain.Users.User", b =>

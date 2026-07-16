@@ -29,7 +29,7 @@ namespace JobBoardPlatform.Domain.Applications
 
         public DateTime? InterviewAt { get; set; }
 
-        public string? Note{ get; set; }
+        public string? NoteWritenByUser{ get; set; }
 
         public Guid JobAdId{ get; set; }
 

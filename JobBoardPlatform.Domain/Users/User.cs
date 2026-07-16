@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,12 +15,16 @@ namespace JobBoardPlatform.Domain.Users
 {
     public class User:IdentityUser<Guid>,IEntity
     {
-      
         public User()
+        {
+            
+        }
+        public User(Guid? resumeId)
         {
             CreatedAt = DateTime.UtcNow;
             ModifiedAt = DateTime.UtcNow;
             IsDeleted = false;
+            ResumeId = resumeId;
         }
         [Required]
         [MinLength(2)]
@@ -33,6 +38,9 @@ namespace JobBoardPlatform.Domain.Users
         public DateTime ModifiedAt { get ; set ; }
         public bool IsDeleted { get; set; }
         public Guid? ProfilePhotoId{ get; set; }
+        public Guid? ResumeId{ get; set; }
+
+        public Attach? ProfilePhoto{ get; set; }
 
         public Company? Company { get; set; }
         public List<Application>? Applications{ get; set; }

@@ -18,33 +18,35 @@ namespace JobBoardPlatform.Domain.entities
         {
             
         }
-        public JobAd(string title, string description, string? location, decimal? salaryMin, decimal? salaryMax, int featurePriority, DateTime? featuredUntil, JobAdStatus status, EmploymentType employementType, Guid companyId, Guid categoryId, string province)
+        public JobAd(string title, string description, string? location, decimal? salaryMin, decimal? salaryMax, int featurePriority, JobAdStatus status, EmploymentType employementType, Guid companyId, Guid categoryId, Guid cityId, List<string>? skils, TimeSpan startWorkTime, TimeSpan endWorkTIme)
         {
             Title = title;
             Description = description;
             Location = location;
             SalaryMin = salaryMin;
             SalaryMax = salaryMax;
-            FeaturePriority = featurePriority;
-            FeaturedUntil = featuredUntil;
             Status = status;
             EmployementType = employementType;
             CompanyId = companyId;
             CategoryId = categoryId;
+            CityId = cityId;
+            Skils = skils;
+            StartWorkTime = startWorkTime;
+            EndWorkTIme = endWorkTIme;
             Validate();
-            Province = province;
         }
         private void Validate()
         {
             if(string.IsNullOrWhiteSpace(Title)) throw new ArgumentNullException("title can not be null");
             if(string.IsNullOrWhiteSpace(Description)) throw new ArgumentNullException("title can not be null");
-            if(string.IsNullOrWhiteSpace(Province)) throw new ArgumentNullException("title can not be null");
             if (FeaturePriority < 1 || FeaturePriority > 3) throw new ArgumentOutOfRangeException("FeatuerPrirate must be in range of (1,3)");
         }
         public string Title { get; set; } = null!;
         public string Description { get; set; } = null!;
         public string? Location { get; set; }
-        public string Province{ get; set; }
+        public TimeSpan StartWorkTime{ get; set; }
+        public TimeSpan EndWorkTIme{ get; set; }
+
 
 
         public decimal? SalaryMin { get; set; }
@@ -64,7 +66,8 @@ namespace JobBoardPlatform.Domain.entities
         public JobCategory Category{ get; set; }
         public Guid CategoryId { get; set; }
 
-
+        public Guid CityId { get; set; }
+        public List<string>? Skils { get; set; }
 
     }
 

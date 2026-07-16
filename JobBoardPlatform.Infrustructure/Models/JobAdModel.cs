@@ -22,7 +22,6 @@ namespace JobBoardPlatform.Infrustructure.Models
             builder.Property(j => j.Description).HasColumnType("nvarchar(400)");
             builder.Property(j => j.Location).HasColumnType("nvarchar(150)");
             builder.Property(j => j.Title).HasColumnType("nvarchar(100)");
-            builder.Property(j => j.Province).HasColumnType("nvarchar(100)");
             
         }
     }

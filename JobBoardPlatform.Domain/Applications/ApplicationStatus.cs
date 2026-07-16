@@ -13,7 +13,6 @@ namespace JobBoardPlatform.Domain.Applications
         Interview = 3,
         Accepted = 4,
         Rejected = 5,
-        Withdrawn = 6
     }
 
 }
