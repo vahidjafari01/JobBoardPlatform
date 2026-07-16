@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("JobBoardPlatfomr.Services")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b2bdeb66b97c68c02437de829cc5907f52c6669c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c5ea6d696b528692cc4f562788f623ed100213dd")]
 [assembly: System.Reflection.AssemblyProductAttribute("JobBoardPlatfomr.Services")]
 [assembly: System.Reflection.AssemblyTitleAttribute("JobBoardPlatfomr.Services")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
