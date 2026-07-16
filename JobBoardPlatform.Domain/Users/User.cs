@@ -34,9 +34,9 @@ namespace JobBoardPlatform.Domain.Users
         [MinLength(3)]
         [MaxLength(50)]
         public string LastName{ get; set; }
-        public DateTime CreatedAt { get ; set ; }
+        public DateTime CreatedAt { get ; set ; } = DateTime.UtcNow;
         public DateTime ModifiedAt { get ; set ; }
-        public bool IsDeleted { get; set; }
+        public bool IsDeleted { get; set; } = false;
         public Guid? ProfilePhotoId{ get; set; }
         public Guid? ResumeId{ get; set; }
 

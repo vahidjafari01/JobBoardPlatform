@@ -18,17 +18,21 @@ namespace JobBoardPlatform.Infrustructure.Models
                 new RoleEntity()
                 {
                     Id = new Guid("290aed19-1878-48cc-9028-ed7419a25b52"),
-                    Name = "Admin"
+                    Name = "Admin",
+                    NormalizedName = "ADMIN"
+
                 },
                 new RoleEntity()
                 {
                     Id = new Guid("3e9f489c-e97f-40dc-85c3-76ce5378303d"),
-                    Name = "JobSeeker"
+                    Name = "JobSeeker",
+                    NormalizedName = "JOBSEEKER"
                 },
                 new RoleEntity()
                 {
                     Id = new Guid("e5e54fe9-0f12-4b07-9243-3471ebe491bc"),
-                    Name = "Employer"
+                    Name = "Employer",
+                    NormalizedName = "EMPLOYER"
                 }
                 );
         }

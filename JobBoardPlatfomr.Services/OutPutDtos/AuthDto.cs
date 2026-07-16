@@ -20,7 +20,7 @@ namespace JobBoardPlatfomr.Services.OutPutDtos
           [Required]
         string lastName
      );
-
+    
     public record LoginDto(
         [Required]
         string UserNameOrEmail,
@@ -31,9 +31,8 @@ namespace JobBoardPlatfomr.Services.OutPutDtos
 
 
     public record AuthResponseDto(
-        bool IsSucces,
         string? Token,
         string Message,
-        User? User
+        Guid UserId
         );
 }

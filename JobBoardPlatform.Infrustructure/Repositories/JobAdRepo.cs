@@ -32,5 +32,9 @@ namespace JobBoardPlatform.Infrustructure.Repositories
             return jobad.Applications ?? new List<Application>();
         
         }
+        public async Task<JobAd?> GetJobAdDetail(Guid jobAdId)
+        {
+            return await _context.JobAds.Include(j => j.Applications).Include(j => j.Payments).FirstOrDefaultAsync(j => j.Id == jobAdId);
+        }
     }
 }

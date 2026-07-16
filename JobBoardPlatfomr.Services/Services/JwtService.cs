@@ -1,4 +1,5 @@
 ﻿using JobBoardPlatfomr.Services.IServices;
+using JobBoardPlatform.Domain.Abstractions;
 using JobBoardPlatform.Domain.Users;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -14,12 +15,15 @@ namespace JobBoardPlatfomr.Services.Services
 {
     public class JwtService : IJwtService
     {
+        private readonly IUnitOfWork unitOfWork;
         private readonly IConfiguration _configuration;
-        public JwtService(IConfiguration config)
-            => _configuration = config;
+        public JwtService(IConfiguration config, IUnitOfWork unitOfWork)
+        {
+            _configuration = config;
+            this.unitOfWork = unitOfWork;
+        }
 
-
-        public string GenerateToken(User user, IList<string> Roles)
+        public async Task<string> GenerateTokenAsync(User user, IList<string> Roles)
         {
             var claims = new List<Claim>()
             {
@@ -34,7 +38,16 @@ namespace JobBoardPlatfomr.Services.Services
             foreach (var role in Roles)
             {
                 claims.Add(new Claim(ClaimTypes.Role, role));
+                if(role == "Employer")
+                {
+                    if(await IsApproved(user.Id))
+                    {
+                        claims.Add(new Claim("IsApproved","true"));
+                    }
+                }
             }
+            
+            
 
 
             var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
@@ -50,6 +63,20 @@ namespace JobBoardPlatfomr.Services.Services
             );
 
             return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+   
+
+        private async Task<bool> IsApproved(Guid userId)
+        {
+            var company =await unitOfWork.CompanyRepo.GetByUserId(userId);
+            if (company == null) {
+             return false;
+            }
+            else
+            {
+                return company.IsApproved;
+            }
         }
     }
 }

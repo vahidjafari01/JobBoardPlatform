@@ -1,11 +1,17 @@
-﻿using JobBoardPlatform.Domain.Users;
+﻿using JobBoardPlatfomr.Services.IServices;
+using JobBoardPlatfomr.Services.Services;
+using JobBoardPlatform.Domain.Abstractions;
+using JobBoardPlatform.Domain.Users;
 using JobBoardPlatform.Infrustructure;
+using JobBoardPlatform.Presentation;
 using JobBoardPlatform.Presentation.Middlewares;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
+using Microsoft.OpenApi.Models;
 using System.Text;
 
 
@@ -56,12 +62,17 @@ builder.Services.AddAuthentication(options =>
         };
     });
 
+builder.Services.AddAuthorization
+    (opt =>
+    {
+        opt.AddPolicy("EmployerOrAdmin", policy => policy.RequireRole("Admin","Employer"));
+    });
 
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo
     {
-        Title = "🔐 Auth Edu API ",
+        Title = "🔐 JobBoard Platform",
         Version = "v1",
     });
 
@@ -91,12 +102,19 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+builder.Services.AddScoped<ICompanyService,CompanyService>();
+builder.Services.AddScoped<IJobAdServices,JobAdService>();
+builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IJwtService, JwtService>();
+builder.Services.AddScoped<GlobalExceptionHandlerMiddleware>();
+
+
 
 
 
 var app = builder.Build();
-app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
-
+//await app.SeedDataBaseAsync();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -107,8 +125,11 @@ if (app.Environment.IsDevelopment())
 }
 
 
+app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
 
 app.UseHttpsRedirection();
+app.UseAuthentication();
+
 
 app.UseAuthorization();
 

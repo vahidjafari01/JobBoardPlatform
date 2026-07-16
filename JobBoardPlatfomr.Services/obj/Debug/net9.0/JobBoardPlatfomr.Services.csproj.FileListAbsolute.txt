@@ -1,0 +1,16 @@
+C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatfomr.Services\bin\Debug\net9.0\JobBoardPlatfomr.Services.deps.json
+C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatfomr.Services\bin\Debug\net9.0\JobBoardPlatfomr.Services.dll
+C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatfomr.Services\bin\Debug\net9.0\JobBoardPlatfomr.Services.pdb
+C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatfomr.Services\bin\Debug\net9.0\JobBoardPlatform.Domain.dll
+C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatfomr.Services\bin\Debug\net9.0\JobBoardPlatform.Domain.pdb
+C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatfomr.Services\obj\Debug\net9.0\JobBoardPlatfomr.Services.csproj.AssemblyReference.cache
+C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatfomr.Services\obj\Debug\net9.0\JobBoardPlatfomr.Services.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatfomr.Services\obj\Debug\net9.0\JobBoardPlatfomr.Services.AssemblyInfoInputs.cache
+C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatfomr.Services\obj\Debug\net9.0\JobBoardPlatfomr.Services.AssemblyInfo.cs
+C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatfomr.Services\obj\Debug\net9.0\JobBoardPlatfomr.Services.csproj.CoreCompileInputs.cache
+C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatfomr.Services\obj\Debug\net9.0\JobBoardPlatfomr.Services.sourcelink.json
+C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatfomr.Services\obj\Debug\net9.0\JobBoard.421F901C.Up2Date
+C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatfomr.Services\obj\Debug\net9.0\JobBoardPlatfomr.Services.dll
+C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatfomr.Services\obj\Debug\net9.0\refint\JobBoardPlatfomr.Services.dll
+C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatfomr.Services\obj\Debug\net9.0\JobBoardPlatfomr.Services.pdb
+C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatfomr.Services\obj\Debug\net9.0\ref\JobBoardPlatfomr.Services.dll

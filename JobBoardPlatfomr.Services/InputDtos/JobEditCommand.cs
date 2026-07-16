@@ -8,6 +8,24 @@ namespace JobBoardPlatfomr.Services.InputDtos
 {
     public record JobEditCommand
     {
+        public JobEditCommand(string title, string description, string? location, TimeSpan startWorkTime, TimeSpan endWorkTIme, decimal? salaryMin, decimal? salaryMax, string employementType, string jobadstatus, Guid categoryId, Guid cityId, Guid requesterId, Guid jobadId, List<string>? skils)
+        {
+            Title = title;
+            Description = description;
+            Location = location;
+            StartWorkTime = startWorkTime;
+            EndWorkTIme = endWorkTIme;
+            SalaryMin = salaryMin;
+            SalaryMax = salaryMax;
+            EmployementType = employementType;
+            Jobadstatus = jobadstatus;
+            CategoryId = categoryId;
+            CityId = cityId;
+            RequesterId = requesterId;
+            JobadId = jobadId;
+            Skils = skils;
+        }
+
         public string Title { get; set; } = null!;
         public string Description { get; set; } = null!;
         public string? Location { get; set; }

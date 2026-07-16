@@ -9,6 +9,22 @@ namespace JobBoardPlatfomr.Services.OutPutDtos
 {
     public record DetailAppDto
     {
+        public DetailAppDto(Guid appId, Attach? resume, string? phoneNumber, string? email, string? note, string firstName, string lastName, DateTime submitedAt, string status)
+        {
+            AppId = appId;
+            this.resume = resume;
+            PhoneNumber = phoneNumber;
+            Email = email;
+            Note = note;
+            FirstName = firstName;
+            LastName = lastName;
+            SubmitedAt = submitedAt;
+            this.status = status;
+        }
+        public DetailAppDto()
+        {
+            
+        }
         public Guid AppId { get; set; }
         public Attach? resume { get; set; }
         public string? PhoneNumber { get; set; }

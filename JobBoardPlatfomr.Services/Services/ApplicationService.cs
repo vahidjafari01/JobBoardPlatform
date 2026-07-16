@@ -32,9 +32,12 @@ namespace JobBoardPlatfomr.Services.Services
             {
                 throw new PermisionException("your company is not approved...", "company-403");
             }
-            if (company.UserId != command.RequesterId)
+            if (!await IsAdmin(command.RequesterId))
             {
-                throw new PermisionException("this jobAd Does not belong to you", "jobAd-403");
+                if (company.UserId != command.RequesterId)
+                {
+                    throw new PermisionException("this jobAd Does not belong to you", "jobAd-403");
+                }
             }
             var jobad = await _unitofWork.JobAdsRepo.GetByIdAsync(command.JobAdId);
             if (jobad == null)
@@ -71,11 +74,14 @@ namespace JobBoardPlatfomr.Services.Services
             {
                 throw new PermisionException("your company is not approved...", "company-403");
             }
-            if (company.UserId != command.RequesterId)
+            if (!await IsAdmin(command.RequesterId))
             {
-                throw new PermisionException("this jobAd Does not belong to you", "jobAd-403");
+                if (company.UserId != command.RequesterId)
+                {
+                    throw new PermisionException("this jobAd Does not belong to you", "jobAd-403");
+                }
             }
-            return new DetailAppDto {
+            return new DetailAppDto { 
              AppId = app.Id,
              Email = app.User.Email,
              FirstName = app.User.FirstName,
@@ -102,11 +108,14 @@ namespace JobBoardPlatfomr.Services.Services
             {
                 throw new PermisionException("your company is not approved...", "company-403");
             }
-            if (company.UserId != command.RequesterId)
+            if (!await IsAdmin(command.RequesterId))
             {
-                throw new PermisionException("this jobAd Does not belong to you", "jobAd-403");
+                if (company.UserId != command.RequesterId)
+                {
+                    throw new PermisionException("this jobAd Does not belong to you", "jobAd-403");
+                }
             }
-            if(!Enum.TryParse<ApplicationStatus>(command.status,true,out var newstatus))
+            if (!Enum.TryParse<ApplicationStatus>(command.status,true,out var newstatus))
             {
                 throw new BadRequestException("the status is not valid");
             }
@@ -131,6 +140,11 @@ namespace JobBoardPlatfomr.Services.Services
 
             if (!allowed)
                 throw new BadRequestException($"Invalid status transition from {currentStatus} to {targetStatus}.");
+        }
+        private async Task<bool> IsAdmin(Guid requesterid)
+        {
+            var user = await _unitofWork.userManager.FindByIdAsync(requesterid.ToString());
+            return await _unitofWork.userManager.IsInRoleAsync(user, "Admin");
         }
 
     }

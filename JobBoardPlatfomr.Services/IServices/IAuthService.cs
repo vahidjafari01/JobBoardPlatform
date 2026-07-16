@@ -1,4 +1,5 @@
-﻿using JobBoardPlatfomr.Services.OutPutDtos;
+﻿using JobBoardPlatfomr.Services.InputDtos;
+using JobBoardPlatfomr.Services.OutPutDtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,9 @@ namespace JobBoardPlatfomr.Services.IServices
 {
     public interface IAuthService
     {
-        Task<AuthResponseDto> RegisterAsync(RegisterDto registerDto);
+        Task<AuthResponseDto> RegisterJobSeekerAsync(RegisterDto registerDto);
 
         Task<AuthResponseDto> LoginAsync(LoginDto dto);
+        Task<AuthResponseDto> RegisterEmployerAsync(AddCompanyCommand command);
     }
 }

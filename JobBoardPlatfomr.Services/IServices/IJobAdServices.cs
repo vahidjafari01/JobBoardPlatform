@@ -19,6 +19,7 @@ namespace JobBoardPlatfomr.Services.IServices
         Task<List<JobAdDto>> GetMyJobAds(GetMyJobAdsCommand command);
         Task ActiveMyJObAd(ActiveJobAdCommand command);
         Task ArchiveMyJobAd(ArchiveMyJobAdCommand command);
+        Task<JobAdDetail> GetDetailJobAd(GetJObAdDetailCommand command);
 
 
     }

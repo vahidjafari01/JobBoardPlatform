@@ -1,5 +1,8 @@
-﻿using JobBoardPlatfomr.Services.IServices;
+﻿using JobBoardPlatfomr.Services.BussinesExceptions;
+using JobBoardPlatfomr.Services.InputDtos;
+using JobBoardPlatfomr.Services.IServices;
 using JobBoardPlatfomr.Services.OutPutDtos;
+using JobBoardPlatform.Domain.Abstractions;
 using JobBoardPlatform.Domain.Users;
 using Microsoft.AspNetCore.Identity;
 using System;
@@ -15,17 +18,18 @@ namespace JobBoardPlatfomr.Services.Services
 
         private readonly UserManager<User> _userManager;
         private readonly IJwtService _jwtService;
-        private readonly SignInManager<User> _signInManager;
         private readonly RoleManager<RoleEntity> _roleManager;
+        private readonly ICompanyService companyService;
+        private readonly IUnitOfWork _unitOfWork;
 
 
-        public AuthService(IJwtService jwtService, UserManager<User> userManager, SignInManager<User> signInManager, RoleManager<RoleEntity> roleManager)
+        public AuthService(IJwtService jwtService, IUnitOfWork unitOfWork, ICompanyService companyService)
         {
             _jwtService = jwtService;
-            _userManager = userManager;
-            _signInManager = signInManager;
-            _roleManager = roleManager;
-
+            _unitOfWork = unitOfWork;
+            _userManager = _unitOfWork.userManager;
+            _roleManager = _unitOfWork.roleManager;
+            this.companyService = companyService;
         }
 
         public async Task<AuthResponseDto> LoginAsync(LoginDto dto)
@@ -34,29 +38,30 @@ namespace JobBoardPlatfomr.Services.Services
                     ?? await _userManager.FindByEmailAsync(dto.UserNameOrEmail);
 
             if (user is null)
-                return new AuthResponseDto(false, null, "با اطلاعات ورودی  کاربری یافت نشد.", null);
+                throw new BadRequestException("the username or password is incorrect");
 
             var isPasswordValid = await _userManager.CheckPasswordAsync(user, dto.Password);
 
             if (!isPasswordValid)
-                return new AuthResponseDto(false, null, "با اطلاعات ورودی  کاربری یافت نشد.", null);
+                throw new BadRequestException("the username or password is incorrect");
+
 
             var roles = await _userManager.GetRolesAsync(user);
 
-            var token = _jwtService.GenerateToken(user, roles);
+            var token =await _jwtService.GenerateTokenAsync(user, roles);
 
-            return new AuthResponseDto(true, token, $"کاربر {user.FirstName + " " + user.LastName} به سیستم خوش امدید .", user);
+            return new AuthResponseDto(token, $"welcome {user.FirstName + " " + user.LastName}", user.Id);
 
         }
 
-        public async Task<AuthResponseDto> RegisterAsync(RegisterDto registerDto)
+        public async Task<AuthResponseDto> RegisterJobSeekerAsync(RegisterDto registerDto)
         {
             var existingUserByUserName = await _userManager.FindByNameAsync(registerDto.UserName) is not null;
             var existingUserByEmail = await _userManager.FindByEmailAsync(registerDto.Email) is not null;
 
 
             if (existingUserByEmail || existingUserByUserName)
-                return new AuthResponseDto(false, null, "با این اطلاعات کاربری ثبت شده است.", null);
+                throw new BadRequestException("this username is already exsist");
 
 
             var user = new User
@@ -70,7 +75,7 @@ namespace JobBoardPlatfomr.Services.Services
             var result = await _userManager.CreateAsync(user, registerDto.Password);
 
             if (!result.Succeeded)
-                return new AuthResponseDto(false, null, "خطا در ثبت نام کاربر.", null);
+                throw new BadRequestException("eror in regestering");
 
 
 
@@ -79,9 +84,25 @@ namespace JobBoardPlatfomr.Services.Services
             var roles = await _userManager.GetRolesAsync(user);
 
 
-            var token = _jwtService.GenerateToken(user, roles);
-            return new AuthResponseDto(true, token, $"کاربر {user.FirstName + " " + user.LastName} به سیستم خوش امدید .", user);
+            var token =await _jwtService.GenerateTokenAsync(user, roles);
+            return new AuthResponseDto(token, $"welcome {user.FirstName + " " + user.LastName}", user.Id);
 
         }
+        public async Task<AuthResponseDto> RegisterEmployerAsync(AddCompanyCommand command)
+        {
+             await companyService.CreateCompany(command);
+
+
+            var user =await _userManager.FindByIdAsync(command.UserId.ToString());
+
+            var roles = await _userManager.GetRolesAsync(user);
+
+
+            var token =await _jwtService.GenerateTokenAsync(user, roles);
+            return new AuthResponseDto(token, $"welcome {user.FirstName + " " + user.LastName}", user.Id);
+
+        }
+
+      
     }
 }

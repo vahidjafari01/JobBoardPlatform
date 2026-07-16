@@ -1,5 +1,436 @@
 [
   {
+    "ContainingType": "JobBoardPlatform.Presentation.Controllers.ApplicationController",
+    "Method": "GetApplicationDetail",
+    "RelativePath": "api/Application/{AppId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "AppId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "JobBoardPlatform.Presentation.Models.BaseResponseDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "JobBoardPlatform.Presentation.Controllers.ApplicationController",
+    "Method": "ChangeAppState",
+    "RelativePath": "api/Application/ChangeApplicationState/{appId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "appId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "command",
+        "Type": "JobBoardPlatform.Presentation.Dtos.AppStatusCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "JobBoardPlatform.Presentation.Models.BaseResponseDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "JobBoardPlatform.Presentation.Controllers.ApplicationController",
+    "Method": "GetApplicationByJobAdId",
+    "RelativePath": "api/Application/GetByJobAdId/{JobAdId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "JobAdId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "JobBoardPlatform.Presentation.Models.BaseResponseDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "JobBoardPlatform.Presentation.Controllers.AuthController",
+    "Method": "Login",
+    "RelativePath": "api/Auth/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "loginDto",
+        "Type": "JobBoardPlatfomr.Services.OutPutDtos.LoginDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "JobBoardPlatform.Presentation.Models.BaseResponseDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "JobBoardPlatform.Presentation.Controllers.AuthController",
+    "Method": "RegisterEmployer",
+    "RelativePath": "api/Auth/registerJobEmployer",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "command",
+        "Type": "JobBoardPlatfomr.Services.InputDtos.AddCompanyCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "JobBoardPlatform.Presentation.Models.BaseResponseDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "JobBoardPlatform.Presentation.Controllers.AuthController",
+    "Method": "RegisterJObSeeker",
+    "RelativePath": "api/Auth/registerJobSeeker",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "registerDto",
+        "Type": "JobBoardPlatfomr.Services.OutPutDtos.RegisterDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "JobBoardPlatform.Presentation.Models.BaseResponseDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "JobBoardPlatform.Presentation.Controllers.CompanyController",
+    "Method": "GetMyCompanyDetail",
+    "RelativePath": "api/Company/{companyId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "companyId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "JobBoardPlatform.Presentation.Models.BaseResponseDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "JobBoardPlatform.Presentation.Controllers.CompanyController",
+    "Method": "EditMyProfileCompany",
+    "RelativePath": "api/Company/{companyId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "companyId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "cmd",
+        "Type": "JobBoardPlatform.Presentation.Dtos.UpdateCompanyDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "JobBoardPlatform.Presentation.Models.BaseResponseDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "JobBoardPlatform.Presentation.Controllers.CompanyController",
+    "Method": "ApproveCompany",
+    "RelativePath": "api/Company/ApproveCompany/{companyId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "companyId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "JobBoardPlatform.Presentation.Models.BaseResponseDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "JobBoardPlatform.Presentation.Controllers.JobAdController",
+    "Method": "CreateJobAd",
+    "RelativePath": "api/JobAd",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cmd",
+        "Type": "JobBoardPlatform.Presentation.Dtos.CreateJobAdCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "JobBoardPlatform.Presentation.Models.BaseResponseDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "JobBoardPlatform.Presentation.Controllers.JobAdController",
+    "Method": "GetDetailJobAds",
+    "RelativePath": "api/JobAd/{jobadId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "jobAdId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "JobBoardPlatform.Presentation.Models.BaseResponseDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "JobBoardPlatform.Presentation.Controllers.JobAdController",
+    "Method": "EditJObAd",
+    "RelativePath": "api/JobAd/{jobAdId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "jobAdId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "cmd",
+        "Type": "JobBoardPlatform.Presentation.Dtos.JobAdEditCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "JobBoardPlatform.Presentation.Models.BaseResponseDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "JobBoardPlatform.Presentation.Controllers.JobAdController",
+    "Method": "DeleteJobAd",
+    "RelativePath": "api/JobAd/{JobAdId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "JobAdId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "JobBoardPlatform.Presentation.Models.BaseResponseDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "JobBoardPlatform.Presentation.Controllers.JobAdController",
+    "Method": "ActiveJobAd",
+    "RelativePath": "api/JobAd/Activate/{jobAdId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "jobAdId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "JobBoardPlatform.Presentation.Models.BaseResponseDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "JobBoardPlatform.Presentation.Controllers.JobAdController",
+    "Method": "ArchiveJobAdId",
+    "RelativePath": "api/JobAd/Archived/{jobAdId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "jobAdId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "JobBoardPlatform.Presentation.Models.BaseResponseDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "JobBoardPlatform.Presentation.Controllers.JobAdController",
+    "Method": "GetMyCompanyJobAds",
+    "RelativePath": "api/JobAd/CompanyJobAds/{companyId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "companyId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "JobBoardPlatform.Presentation.Models.BaseResponseDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "JobBoardPlatform.Presentation.Controllers.WeatherForecastController",
     "Method": "Get",
     "RelativePath": "WeatherForecast",

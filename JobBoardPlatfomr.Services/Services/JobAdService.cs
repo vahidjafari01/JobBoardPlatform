@@ -83,9 +83,12 @@ namespace JobBoardPlatfomr.Services.Services
             {
                 throw new PermisionException("your company is not approved...", "company-403");
             }
-            if (company.UserId != command.RequesterId)
+            if (!await IsAdmin(command.RequesterId))
             {
-                throw new PermisionException("this jobAd Does not belong to you", "jobAd-403");
+                if (company.UserId != command.RequesterId)
+                {
+                    throw new PermisionException("this jobAd Does not belong to you", "jobAd-403");
+                }
             }
             var category = await _unitofwork.JobCategoryRepo.GetByIdAsync(command.CategoryId);
             if (category == null)
@@ -153,19 +156,21 @@ namespace JobBoardPlatfomr.Services.Services
             var company = await _unitofwork.JobAdsRepo.GetCompanyWithJobAdIdAsync(command.JObAdID);
             if (company == null)
             {
-                throw new NotFoundException("company not found", "company-404");
+                throw new NotFoundException("jobad not found", "jobad-404");
             }
             if (!company.IsApproved)
             {
                 throw new PermisionException("your company is not approved...", "company-403");
             }
-            if (company.UserId != command.RequesterId)
+            if (!await IsAdmin(command.RequesterId))
             {
-                throw new PermisionException("this jobAd Does not belong to you", "jobAd-403");
+                if (company.UserId != command.RequesterId)
+                {
+                    throw new PermisionException("this jobAd Does not belong to you", "jobAd-403");
+                }
             }
-
-
-            await _unitofwork.JobAdsRepo.DeleteAsync(command.JObAdID);
+            var jobad =await _unitofwork.JobAdsRepo.GetByIdAsync(command.JObAdID,true);
+            jobad.Status = JobAdStatus.Closed;
             await _unitofwork.JobAdsRepo.SaveChangesAsync();
         }
         public async Task<List<JobAdDto>> GetMyJobAds(GetMyJobAdsCommand command)
@@ -175,9 +180,12 @@ namespace JobBoardPlatfomr.Services.Services
             {
                 throw new NotFoundException("company not found", "company-404");
             }
-            if(company.UserId != command.RequesterId)
+            if (!await IsAdmin(command.RequesterId))
             {
-                throw new PermisionException("this jobAd Does not belong to you", "jobAd-403");
+                if (company.UserId != command.RequesterId)
+                {
+                    throw new PermisionException("this jobAd Does not belong to you", "jobAd-403");
+                }
             }
             var jobads = await _unitofwork.JobAdsRepo.QueryAsync(j => j.CompanyId == command.companyId );
             return jobads.Select(j => new JobAdDto
@@ -202,25 +210,25 @@ namespace JobBoardPlatfomr.Services.Services
             var company = await _unitofwork.JobAdsRepo.GetCompanyWithJobAdIdAsync(command.JobId);
             if (company == null)
             {
-                throw new NotFoundException("company not found", "company-404");
+                throw new NotFoundException("jobad not found", "jobad-404");
             }
             if (!company.IsApproved)
             {
                 throw new PermisionException("your company is not approved...", "company-403");
             }
-            if (company.UserId != command.RequesterId)
+            if (!await IsAdmin(command.RequesterId))
             {
-                throw new PermisionException("this jobAd Does not belong to you", "jobAd-403");
+                if (company.UserId != command.RequesterId)
+                {
+                    throw new PermisionException("this jobAd Does not belong to you", "jobAd-403");
+                }
             }
             var jobad = await _unitofwork.JobAdsRepo.GetByIdAsync(command.JobId,true);
             if (jobad == null)
             {
                 throw new NotFoundException("job not found", "jobad-404");
             }
-            if(jobad.Status == JobAdStatus.Published)
-            {
-                jobad.Status = JobAdStatus.Closed;
-            }else if(jobad.Status == JobAdStatus.Closed)
+            if(jobad.Status == JobAdStatus.Closed)
             {
                 jobad.Status = JobAdStatus.Published;
             }
@@ -232,15 +240,18 @@ namespace JobBoardPlatfomr.Services.Services
             var company = await _unitofwork.JobAdsRepo.GetCompanyWithJobAdIdAsync(command.JobId);
             if (company == null)
             {
-                throw new NotFoundException("company not found", "company-404");
+                throw new NotFoundException("jobAD not found", "JobAd-404");
             }
             if (!company.IsApproved)
             {
                 throw new PermisionException("your company is not approved...", "company-403");
             }
-            if (company.UserId != command.RequesterId)
+            if (!await IsAdmin(command.RequesterId))
             {
-                throw new PermisionException("this jobAd Does not belong to you", "jobAd-403");
+                if (company.UserId != command.RequesterId)
+                {
+                    throw new PermisionException("this jobAd Does not belong to you", "jobAd-403");
+                }
             }
             var jobad = await _unitofwork.JobAdsRepo.GetByIdAsync(command.JobId, true);
             if (jobad == null)
@@ -253,7 +264,45 @@ namespace JobBoardPlatfomr.Services.Services
 
 
         }
+        public async Task<JobAdDetail> GetDetailJobAd(GetJObAdDetailCommand command)
+        {
+            var company = await _unitofwork.JobAdsRepo.GetCompanyWithJobAdIdAsync(command.JobAdId);
+            if (company == null)
+            {
+                throw new NotFoundException("jobAd not found", "jobAd-404");
+            }
+            if (!company.IsApproved)
+            {
+                throw new PermisionException("your company is not approved...", "company-403");
+            }
+            if (!await IsAdmin(command.RequesterId))
+            {
+                if (company.UserId != command.RequesterId)
+                {
+                    throw new PermisionException("this jobAd Does not belong to you", "jobAd-403");
+                }
+            }
+           
+            var jobad = await _unitofwork.JobAdsRepo.GetJobAdDetail(command.JobAdId);
+            if (jobad == null)
+            {
+                throw new NotFoundException("jobAd not found", "jobad-404");
+            }
+           
+            var category =await _unitofwork.JobCategoryRepo.GetByIdAsync(jobad.CategoryId);
+            if (category == null)
+            {
+                throw new NotFoundException("category not found", "category-404");
+            }
+            var jobAdDetail = new JobAdDetail(jobad.Title,jobad.Description,jobad.Location,jobad.StartWorkTime,jobad.EndWorkTIme,jobad.SalaryMin,jobad.SalaryMax,jobad.IsFeatured,jobad.Status.ToString(),jobad.EmployementType.ToString(),jobad.Skils,jobad.FeaturePriority,jobad.FeaturedUntil,jobad.Applications.Count(),jobad.Payments,category.Name);
+            return jobAdDetail;
 
+        }
+        private async Task<bool> IsAdmin(Guid requesterid)
+        {
+            var user =await _unitofwork.userManager.FindByIdAsync(requesterid.ToString());
+            return await _unitofwork.userManager.IsInRoleAsync(user,"Admin");
+        }
 
 
 

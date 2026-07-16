@@ -13,8 +13,6 @@
         public string Jobadstatus { get; set; }
         public Guid CategoryId { get; set; }
         public Guid CityId { get; set; }
-        public Guid RequesterId { get; set; }
-        public Guid JobadId { get; set; }
         public List<string>? Skils { get; set; }
     }
 }

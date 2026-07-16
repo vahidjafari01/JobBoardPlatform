@@ -2,6 +2,7 @@
 using JobBoardPlatfomr.Services.IServices;
 using JobBoardPlatform.Presentation.Dtos;
 using JobBoardPlatform.Presentation.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -21,6 +22,7 @@ namespace JobBoardPlatform.Presentation.Controllers
 
 
         [HttpGet("{companyId:guid}")]
+        [Authorize(policy:"EmployerOrAdmin")]
         public async Task<ActionResult<BaseResponseDto>> GetMyCompanyDetail([FromRoute] Guid companyId)
         {
             var user = User;
@@ -32,6 +34,8 @@ namespace JobBoardPlatform.Presentation.Controllers
             return Ok(new BaseResponseDto(result));
         }
         [HttpPut("{companyId:guid}")]
+        [Authorize(policy: "EmployerOrAdmin")]
+
         public async Task<ActionResult<BaseResponseDto>> EditMyProfileCompany([FromRoute] Guid companyId, [FromBody] UpdateCompanyDto cmd)
         {
             var user = User;
@@ -42,8 +46,13 @@ namespace JobBoardPlatform.Presentation.Controllers
             await _companyService.UpdateCompanyAsync(command);
             return Ok(new BaseResponseDto("succesfully updated"));
         }
-       
-
+        [HttpPut("ApproveCompany/{companyId:guid}")]
+        [Authorize(Roles ="Admin")]
+        public async Task<ActionResult<BaseResponseDto>> ApproveCompany([FromRoute] Guid companyId)
+        {
+            await _companyService.SetApprovedCompanyAsync(companyId);
+            return Ok(new BaseResponseDto("succesfully Approved"));
+        }
 
 
 

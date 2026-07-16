@@ -326,21 +326,24 @@ namespace JobBoardPlatform.Infrustructure.Migrations
                             Id = new Guid("290aed19-1878-48cc-9028-ed7419a25b52"),
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Admin"
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = new Guid("3e9f489c-e97f-40dc-85c3-76ce5378303d"),
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "JobSeeker"
+                            Name = "JobSeeker",
+                            NormalizedName = "JOBSEEKER"
                         },
                         new
                         {
                             Id = new Guid("e5e54fe9-0f12-4b07-9243-3471ebe491bc"),
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Employer"
+                            Name = "Employer",
+                            NormalizedName = "EMPLOYER"
                         });
                 });
 
@@ -434,7 +437,9 @@ namespace JobBoardPlatform.Infrustructure.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.HasIndex("ProfilePhotoId");
+                    b.HasIndex("ProfilePhotoId")
+                        .IsUnique()
+                        .HasFilter("[ProfilePhotoId] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
                 });
@@ -682,8 +687,8 @@ namespace JobBoardPlatform.Infrustructure.Migrations
             modelBuilder.Entity("JobBoardPlatform.Domain.Users.User", b =>
                 {
                     b.HasOne("JobBoardPlatform.Domain.Abstractions.Attach", "ProfilePhoto")
-                        .WithMany()
-                        .HasForeignKey("ProfilePhotoId");
+                        .WithOne()
+                        .HasForeignKey("JobBoardPlatform.Domain.Users.User", "ProfilePhotoId");
 
                     b.Navigation("ProfilePhoto");
                 });

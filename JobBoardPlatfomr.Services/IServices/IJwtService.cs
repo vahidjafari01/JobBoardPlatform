@@ -9,6 +9,6 @@ namespace JobBoardPlatfomr.Services.IServices
 {
     public interface IJwtService
     {
-        string GenerateToken(User user, IList<string> Roles);
+        Task<string> GenerateTokenAsync(User user, IList<string> Roles);
     }
 }

@@ -1,0 +1,13 @@
+C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatform.Domain\bin\Debug\net9.0\JobBoardPlatform.Domain.deps.json
+C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatform.Domain\bin\Debug\net9.0\JobBoardPlatform.Domain.dll
+C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatform.Domain\bin\Debug\net9.0\JobBoardPlatform.Domain.pdb
+C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatform.Domain\obj\Debug\net9.0\JobBoardPlatform.Domain.csproj.AssemblyReference.cache
+C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatform.Domain\obj\Debug\net9.0\JobBoardPlatform.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatform.Domain\obj\Debug\net9.0\JobBoardPlatform.Domain.AssemblyInfoInputs.cache
+C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatform.Domain\obj\Debug\net9.0\JobBoardPlatform.Domain.AssemblyInfo.cs
+C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatform.Domain\obj\Debug\net9.0\JobBoardPlatform.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatform.Domain\obj\Debug\net9.0\JobBoardPlatform.Domain.sourcelink.json
+C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatform.Domain\obj\Debug\net9.0\JobBoardPlatform.Domain.dll
+C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatform.Domain\obj\Debug\net9.0\refint\JobBoardPlatform.Domain.dll
+C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatform.Domain\obj\Debug\net9.0\JobBoardPlatform.Domain.pdb
+C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatform.Domain\obj\Debug\net9.0\ref\JobBoardPlatform.Domain.dll

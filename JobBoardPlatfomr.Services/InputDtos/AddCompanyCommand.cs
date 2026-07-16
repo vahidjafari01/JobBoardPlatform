@@ -11,6 +11,16 @@ namespace JobBoardPlatfomr.Services.InputDtos
 {
     public record AddCompanyCommand
     {
+        public AddCompanyCommand(Guid userId, string name, string? description, string? website, string location, Guid cityId)
+        {
+            UserId = userId;
+            Name = name;
+            Description = description;
+            Website = website;
+            Location = location;
+            CityId = cityId;
+        }
+
         public Guid UserId { get; set; }
 
         public string Name { get; set; } 
