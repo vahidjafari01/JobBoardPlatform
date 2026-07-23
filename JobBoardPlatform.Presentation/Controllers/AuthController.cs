@@ -39,5 +39,20 @@ namespace JobBoardPlatform.Presentation.Controllers
             var result = await _authService.LoginAsync(loginDto);
             return Ok(new BaseResponseDto(result));
         }
+
+        [HttpPost("Refresh")]
+        public async Task<ActionResult<BaseResponseDto>> Login([FromBody] RefreshDto refreshDto)
+        {
+            var result = await _authService.Refresh(refreshDto.token, refreshDto.UserId);
+            return Ok(new BaseResponseDto(result));
+        }
+        [HttpPost("logOut")]
+        [Authorize]
+        public async Task<ActionResult<BaseResponseDto>> Logout([FromBody] RefreshDto refreshDto)
+        {
+            var result = await _authService.LogOutAsync(refreshDto.token, refreshDto.UserId);
+            return Ok(new BaseResponseDto(result));
+        }
+
     }
 }

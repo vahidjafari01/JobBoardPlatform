@@ -14,5 +14,7 @@ namespace JobBoardPlatfomr.Services.IServices
 
         Task<AuthResponseDto> LoginAsync(LoginDto dto);
         Task<AuthResponseDto> RegisterEmployerAsync(AddCompanyCommand command);
+        Task<string> LogOutAsync(string refreshToken, Guid userId);
+        Task<RefreshDto> Refresh(string RefreshToken, Guid userId);
     }
 }

@@ -13,21 +13,21 @@ namespace JobBoardPlatform.Domain.Applications
 {
     public class Application:BaseEntity
     {
-        public Application()
+        private Application()
         {
             
         }
-        public Application(ApplicationStatus status, Guid jobAdId, Guid userId)
+        public Application(ApplicationStatus status, Guid jobAdId, Guid userId, string? noteWritenByUser)
         {
             Status = status;
             JobAdId = jobAdId;
             UserId = userId;
+            NoteWritenByUser = noteWritenByUser;
         }
         public ApplicationStatus Status { get; set; } = ApplicationStatus.Submitted;
 
         public DateTime? ReviewedAt { get; set; }
 
-        public DateTime? InterviewAt { get; set; }
 
         public string? NoteWritenByUser{ get; set; }
 

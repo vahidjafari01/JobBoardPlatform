@@ -21,6 +21,7 @@ namespace JobBoardPlatform.Infrustructure.Models
             builder.Property(c => c.Location).HasColumnType("nvarchar(100)");
             builder.Property(c => c.Website).HasColumnType("nvarchar(100)");
             builder.Property(c => c.Description).HasColumnType("nvarchar(500)");
+            builder.HasOne(c => c.Logo).WithOne().HasForeignKey<Company>(c => c.LogoId).OnDelete(DeleteBehavior.Cascade);
 
         }
     }

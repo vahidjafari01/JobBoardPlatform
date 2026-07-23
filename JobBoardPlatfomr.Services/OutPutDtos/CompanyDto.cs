@@ -11,7 +11,7 @@ namespace JobBoardPlatfomr.Services.OutPutDtos
 {
     public class CompanyDto
     {
-        public CompanyDto(string name, string? description, string? website, string location, string ownerName, DateTime createdAt, DateTime modifiedAt)
+        public CompanyDto(string name, string? description, string? website, string location, string ownerName, DateTime createdAt, DateTime modifiedAt, Guid? logoId)
         {
             Name = name;
             Description = description;
@@ -21,6 +21,7 @@ namespace JobBoardPlatfomr.Services.OutPutDtos
             OwnerName = ownerName;
             CreatedAt = createdAt;
             ModifiedAt = modifiedAt;
+            LogoId = logoId;
         }
 
         public string Name { get; set; }
@@ -32,6 +33,6 @@ namespace JobBoardPlatfomr.Services.OutPutDtos
         public DateTime CreatedAt { get; set; }
         public DateTime ModifiedAt { get; set; }
 
-        public Attach? Logo { get; set; }
+        public Guid? LogoId{ get; set; }
     }
 }

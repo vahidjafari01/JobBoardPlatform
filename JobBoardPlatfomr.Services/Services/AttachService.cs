@@ -1,4 +1,6 @@
 ﻿using JobBoardPlatfomr.Services.BussinesExceptions;
+using JobBoardPlatfomr.Services.IServices;
+using JobBoardPlatfomr.Services.OutPutDtos;
 using JobBoardPlatform.Domain.Abstractions;
 using Microsoft.AspNetCore.Http;
 using System;
@@ -11,50 +13,54 @@ using System.Threading.Tasks;
 
 namespace JobBoardPlatfomr.Services.Services
 {
-    //public class AttachService
-    //{
-    //    public async Task<AttachmentResponseDto> DownloadAsync(Guid attachmentId)
-    //    {
-    //        var attachment = await _unitOfWork.AttachmentRepository.GetAttachmentByIdAsync(a => new AttachmentResponseDto
-    //        {
-    //            FileName = a.FileName,
-    //            ContentType = a.ContentType,
-    //            Data = a.Data
-    //        }, attachmentId);
+    public class AttachService: IAttachService
+    {
+        private IUnitOfWork _unitofWork;
 
-    //        if (attachment == null)
-    //            throw new NotFoundException($"the attachment with id {attachmentId} was not found");
+        public AttachService(IUnitOfWork unitofWork)
+        {
+            _unitofWork = unitofWork;
+        }
 
-    //        return attachment;
-    //    }
+        public async Task<AttachOutputDto> DownloadAsync(Guid attachmentId)
+        {
+            var attachment = await _unitofWork.AttacheRepo.GetByIdAsync(attachmentId);
 
-    //    public async Task<bool> HardDeleteAttachmentAsync(Guid attachmentId)
-    //    {
+            if (attachment == null)
+                throw new NotFoundException($"the attachment with id {attachmentId} was not found","attach-404");
 
-    //        var result = await _unitOfWork.AttachmentRepository.HardDeleteAttachmentAsync(attachmentId);
+            return new AttachOutputDto()
+            {
+                contentType = attachment.ContentType,
+                Filedb64 = attachment.Filedb64,
+                Filename = attachment.FileName
+            };
+        }
 
-    //        if (!result)
-    //            throw new NotFoundException($"the attachment with id {attachmentId} was not found","File-404");
+        public async Task HardDeleteAttachmentAsync(Guid attachmentId)
+        {
 
-    //        return await _unitOfWork.SaveChangesAsync() > 0;
-    //    }
+            await _unitofWork.AttacheRepo.DeleteAsync(attachmentId);
 
-    //    public async Task<Guid> UploadAsync(IFormFile formFile)
-    //    {
-    //        if (formFile == null)
-    //            throw new ValidationException("file is required");
+            await _unitofWork.SaveChangesAsync();
+        }
 
-    //        using var stream = new MemoryStream();
+        public async Task<Guid> UploadAsync(IFormFile formFile)
+        {
+            if (formFile == null)
+                throw new ValidationException("file is required");
 
-    //        await formFile.CopyToAsync(stream);
+            using var stream = new MemoryStream();
 
-    //        var attachment = new Attachment(formFile.FileName, formFile.ContentType, stream.ToArray(), _currentUser.UserId);
+            await formFile.CopyToAsync(stream);
 
-    //        await _unitOfWork.AttachmentRepository.AddAsync(attachment);
+            var attachment = new Attach(stream.ToArray(),formFile.ContentType,formFile.FileName);
 
-    //        await _unitOfWork.SaveChangesAsync();
+            await _unitofWork.AttacheRepo.AddAsync(attachment);
 
-    //        return attachment.Id;
-    //    }
-    //}
+            await _unitofWork.SaveChangesAsync();
+
+            return attachment.Id;
+        }
+    }
 }

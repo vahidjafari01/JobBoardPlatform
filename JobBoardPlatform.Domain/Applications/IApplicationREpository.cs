@@ -10,5 +10,8 @@ namespace JobBoardPlatform.Domain.Applications
     public interface IApplicationREpository:IGenericRepository<Application>
     {
         Task<Application?> GetDetailAppbyIdAsync(Guid appid);
+        Task<bool> AlreadyExsist(Guid userId, Guid JobadId);
+        Task<List<Application>> GetJoinedApps(Guid userId);
+        Task<Application?> GetJoinedAppByAppId(Guid appId);
     }
 }

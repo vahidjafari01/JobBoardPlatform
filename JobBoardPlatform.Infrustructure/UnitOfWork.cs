@@ -39,6 +39,7 @@ namespace JobBoardPlatform.Infrustructure
         public IAttachRepo AttacheRepo { get; }
 
         public IApplicationREpository ApplicationRepo { get; }
+        public IRefreshTokenRepo RefreshTokenRepo{ get; }
         public UserManager<User> userManager{ get;  }
         public RoleManager<RoleEntity> roleManager{ get; }
 
@@ -59,7 +60,7 @@ namespace JobBoardPlatform.Infrustructure
             PaymentsRepo = new PaymentRepo(appDbContext);
             ApplicationRepo = new ApplicationRepo(appDbContext);
             AttacheRepo = new AttachREpo(appDbContext);
-           
+            RefreshTokenRepo = new RefreshTokenRepo(appDbContext);
         }
 
         public async Task BeginTransactionAsync()

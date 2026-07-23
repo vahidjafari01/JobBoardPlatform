@@ -7,6 +7,7 @@ using JobBoardPlatform.Domain.entities;
 using JobBoardPlatform.Domain.enums;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
@@ -14,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace JobBoardPlatfomr.Services.Services
 {
-    public class JobAdService:IJobAdServices
+    public class JobAdService : IJobAdServices
     {
 
         private readonly IUnitOfWork _unitofwork;
@@ -134,8 +135,8 @@ namespace JobBoardPlatfomr.Services.Services
         }
         public async Task<List<JobAdDto>> GetJobAds(Paging paging)
         {
-            var jobads = await _unitofwork.JobAdsRepo.GetJObAdsPaging(paging.PageNumber, paging.Skip,j => j.Status == JobAdStatus.Published);
-             return jobads.Select(j => new JobAdDto
+            var jobads = await _unitofwork.JobAdsRepo.GetJObAdsPaging(paging.PageNumber, paging.Skip, j => j.Status == JobAdStatus.Published);
+            return jobads.Select(j => new JobAdDto
             {
                 Title = j.Title,
                 Description = j.Description,
@@ -169,14 +170,14 @@ namespace JobBoardPlatfomr.Services.Services
                     throw new PermisionException("this jobAd Does not belong to you", "jobAd-403");
                 }
             }
-            var jobad =await _unitofwork.JobAdsRepo.GetByIdAsync(command.JObAdID,true);
+            var jobad = await _unitofwork.JobAdsRepo.GetByIdAsync(command.JObAdID, true);
             jobad.Status = JobAdStatus.Closed;
             await _unitofwork.JobAdsRepo.SaveChangesAsync();
         }
         public async Task<List<JobAdDto>> GetMyJobAds(GetMyJobAdsCommand command)
         {
             var company = await _unitofwork.CompanyRepo.GetByIdAsync(command.companyId);
-            if(company is null)
+            if (company is null)
             {
                 throw new NotFoundException("company not found", "company-404");
             }
@@ -187,7 +188,7 @@ namespace JobBoardPlatfomr.Services.Services
                     throw new PermisionException("this jobAd Does not belong to you", "jobAd-403");
                 }
             }
-            var jobads = await _unitofwork.JobAdsRepo.QueryAsync(j => j.CompanyId == command.companyId );
+            var jobads = await _unitofwork.JobAdsRepo.QueryAsync(j => j.CompanyId == command.companyId);
             return jobads.Select(j => new JobAdDto
             {
                 Title = j.Title,
@@ -223,12 +224,12 @@ namespace JobBoardPlatfomr.Services.Services
                     throw new PermisionException("this jobAd Does not belong to you", "jobAd-403");
                 }
             }
-            var jobad = await _unitofwork.JobAdsRepo.GetByIdAsync(command.JobId,true);
+            var jobad = await _unitofwork.JobAdsRepo.GetByIdAsync(command.JobId, true);
             if (jobad == null)
             {
                 throw new NotFoundException("job not found", "jobad-404");
             }
-            if(jobad.Status == JobAdStatus.Closed)
+            if (jobad.Status == JobAdStatus.Closed)
             {
                 jobad.Status = JobAdStatus.Published;
             }
@@ -259,7 +260,7 @@ namespace JobBoardPlatfomr.Services.Services
                 throw new NotFoundException("jobAd not found", "jobad-404");
             }
             jobad.Status = JobAdStatus.Archived;
-           
+
             await _unitofwork.JobAdsRepo.SaveChangesAsync();
 
 
@@ -282,27 +283,89 @@ namespace JobBoardPlatfomr.Services.Services
                     throw new PermisionException("this jobAd Does not belong to you", "jobAd-403");
                 }
             }
-           
+
             var jobad = await _unitofwork.JobAdsRepo.GetJobAdDetail(command.JobAdId);
             if (jobad == null)
             {
                 throw new NotFoundException("jobAd not found", "jobad-404");
             }
-           
-            var category =await _unitofwork.JobCategoryRepo.GetByIdAsync(jobad.CategoryId);
+
+            var category = await _unitofwork.JobCategoryRepo.GetByIdAsync(jobad.CategoryId);
             if (category == null)
             {
                 throw new NotFoundException("category not found", "category-404");
             }
-            var jobAdDetail = new JobAdDetail(jobad.Title,jobad.Description,jobad.Location,jobad.StartWorkTime,jobad.EndWorkTIme,jobad.SalaryMin,jobad.SalaryMax,jobad.IsFeatured,jobad.Status.ToString(),jobad.EmployementType.ToString(),jobad.Skils,jobad.FeaturePriority,jobad.FeaturedUntil,jobad.Applications.Count(),jobad.Payments,category.Name);
+            var jobAdDetail = new JobAdDetail(jobad.Title, jobad.Description, jobad.Location, jobad.StartWorkTime, jobad.EndWorkTIme, jobad.SalaryMin, jobad.SalaryMax, jobad.IsFeatured, jobad.Status.ToString(), jobad.EmployementType.ToString(), jobad.Skils, jobad.FeaturePriority, jobad.FeaturedUntil, jobad.Applications.Count(), jobad.Payments, category.Name);
             return jobAdDetail;
 
         }
         private async Task<bool> IsAdmin(Guid requesterid)
         {
-            var user =await _unitofwork.userManager.FindByIdAsync(requesterid.ToString());
-            return await _unitofwork.userManager.IsInRoleAsync(user,"Admin");
+            var user = await _unitofwork.userManager.FindByIdAsync(requesterid.ToString());
+            return await _unitofwork.userManager.IsInRoleAsync(user, "Admin");
         }
+
+
+        public async Task<List<JobAdViewModel>> GetJobAdsForCustomersAsync(GetJObAdFilterCommand cmd, Paging? paging)
+        {
+            EmploymentType? finalEmploymentType = null;
+            if (paging == null)
+            {
+                paging = new Paging();
+            }
+
+            if (cmd.EmployementType != null)
+            {
+                if (!Enum.TryParse<EmploymentType>(cmd.EmployementType, true, out var resultstatus))
+                {
+                    throw new BadRequestException("the employment type is not valid");
+                }
+                finalEmploymentType = resultstatus;
+            }
+
+            var command = new GetJobAdCommand()
+            {
+                CompanyId = cmd.CompanyId,
+                CityId = cmd.CityId,
+                ProvinceId = cmd.ProvinceId,
+                CategoryId = cmd.CategoryId,
+                SalaryMax = cmd.SalaryMax,
+                SalaryMin = cmd.SalaryMin,
+                EmployementType = finalEmploymentType,
+                Skils = cmd.Skils,
+                Title = cmd.Title,
+            };
+            var jobads = await _unitofwork.JobAdsRepo.GetJobAdsBYFilter(command, paging.PageSize, paging.Skip);
+            return jobads.Select(j => new JobAdViewModel {
+                Title = j.Title,
+                JobAdId = j.Id,
+                SalaryMin = j.SalaryMin,
+                SalaryMax = j.SalaryMax,
+                IsFeatured = j.IsFeatured,
+                EmployementType = j.EmployementType.ToString(),
+                LogoId = j.Company.LogoId,
+            }).ToList();
+
+        }
+        public async Task<JobAdDetailForCustomer> GetJobAdDetailForCustomerAsync(Guid JobAdId)
+        {
+            var jobad =await _unitofwork.JobAdsRepo.GetJoinedJobAd(JobAdId);
+            if(jobad == null)
+            {
+                throw new NotFoundException("JobAd not found","jobAd-404");
+            }
+            return new JobAdDetailForCustomer(jobad.Title,jobad.Description
+                ,jobad.Location,jobad.StartWorkTime,
+                jobad.EndWorkTIme,jobad.SalaryMin,
+                jobad.SalaryMax,jobad.Status.ToString(),
+                jobad.EmployementType.ToString(),
+                jobad.Skils,jobad.Category.Name,
+                jobad.Company.LogoId,jobad.Company.Name,
+                jobad.Company.Description,jobad.Company.Website,
+                jobad.Company.Location);
+        }
+
+
 
 
 

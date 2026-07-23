@@ -18,5 +18,8 @@ namespace JobBoardPlatform.Domain.entities
         Task<List<Application>> GetApplicationsJobAd(Guid jobadId);
 
         Task<JobAd?> GetJobAdDetail(Guid jobAdId);
+        Task<List<JobAd>> GetJobAdsBYFilter(GetJobAdCommand command, int take, int skip);
+
+        Task<JobAd?> GetJoinedJobAd(Guid JobAdId);
     }
 }

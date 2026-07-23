@@ -28,7 +28,8 @@ namespace JobBoardPlatform.Domain.Abstractions
         IPaymentRepository PaymentsRepo { get; }
         IApplicationREpository ApplicationRepo { get; }
         IAttachRepo AttacheRepo { get; }
-         UserManager<User> userManager { get; }
+        public IRefreshTokenRepo RefreshTokenRepo { get; }
+        UserManager<User> userManager { get; }
          RoleManager<RoleEntity> roleManager { get; }
 
         Task BeginTransactionAsync();

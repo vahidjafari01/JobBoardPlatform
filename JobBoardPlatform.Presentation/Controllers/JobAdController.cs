@@ -1,5 +1,6 @@
 ﻿using JobBoardPlatfomr.Services.InputDtos;
 using JobBoardPlatfomr.Services.IServices;
+using JobBoardPlatform.Domain.Abstractions;
 using JobBoardPlatform.Presentation.Dtos;
 using JobBoardPlatform.Presentation.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -15,10 +16,12 @@ namespace JobBoardPlatform.Presentation.Controllers
     public class JobAdController:ControllerBase
     {
         private readonly IJobAdServices _jobAdService;
+        private readonly IAttachService _attachService;
 
-        public JobAdController(IJobAdServices jobAdService)
+        public JobAdController(IJobAdServices jobAdService, IAttachService attachService)
         {
             _jobAdService = jobAdService;
+            _attachService = attachService;
         }
 
         [HttpPost]
@@ -114,7 +117,34 @@ namespace JobBoardPlatform.Presentation.Controllers
             await _jobAdService.ArchiveMyJobAd(cmd);
             return Ok(new BaseResponseDto("Archived succesfully"));
         }
-       
+        [HttpGet]
+        public async Task<ActionResult<BaseResponseDto>> GetJobAds([FromQuery] GetJObAdFilterCommand cmd, [FromQuery] Paging? paging)
+        {
+            var result =await _jobAdService.GetJobAdsForCustomersAsync(cmd, paging);
+
+
+            return Ok(new BaseResponseDto(result));
+
+        }
+        [HttpGet("Customer/{jobAdId:guid}")]
+
+        public async Task<ActionResult<BaseResponseDto>> GetDetailJobAd([FromRoute] Guid jobAdId)
+        {
+            var result = await _jobAdService.GetJobAdDetailForCustomerAsync(jobAdId);
+
+            return Ok(new BaseResponseDto(result));
+        }
+
+
+        [HttpGet("Logo/{logoId:guid}")]
+        public async Task<ActionResult> GetCompanyLogo([FromRoute] Guid logoId)
+        {
+            var result =await _attachService.DownloadAsync(logoId);
+
+            return File(result.Filedb64,result.contentType);
+        } 
+
+
 
 
 

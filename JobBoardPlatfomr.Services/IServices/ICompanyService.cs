@@ -1,5 +1,6 @@
 ﻿using JobBoardPlatfomr.Services.InputDtos;
 using JobBoardPlatfomr.Services.OutPutDtos;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,7 @@ namespace JobBoardPlatfomr.Services.IServices
         Task UpdateCompanyAsync(UpdateCompanyComand command);
         Task<CompanyDto> GetMyCompanyDetailAsync(GetCompanyDetailCommand command);
         Task SetApprovedCompanyAsync(Guid companyId);
+
+        Task<Guid> UploadCompanyLogo(Guid companyId, Guid requesterId, IFormFile file);
     }
 }

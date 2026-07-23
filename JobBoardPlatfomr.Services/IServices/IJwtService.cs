@@ -10,5 +10,6 @@ namespace JobBoardPlatfomr.Services.IServices
     public interface IJwtService
     {
         Task<string> GenerateTokenAsync(User user, IList<string> Roles);
+        Task<string> GenerateRefreshToken(Guid userId);
     }
 }

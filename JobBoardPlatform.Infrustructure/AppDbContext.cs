@@ -32,6 +32,7 @@ namespace JobBoardPlatform.Infrustructure
         public DbSet<City> Cities{ get; set; }
         public DbSet<Company> Companies{ get; set; }
         public DbSet<JobCategory> JobCategories{ get; set; }
+        public DbSet<RefreshToken> RefreshTokens{ get; set; }
         public DbSet<Payment> Payments{ get; set; }
         public DbSet<Notification> Notifications{ get; set; }
         protected override void OnModelCreating(ModelBuilder builder)

@@ -6,6 +6,7 @@ using JobBoardPlatform.Domain.Abstractions;
 using JobBoardPlatform.Domain.BaseExceptions;
 using JobBoardPlatform.Domain.Companies;
 using JobBoardPlatform.Domain.Users;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,10 +20,12 @@ namespace JobBoardPlatfomr.Services.Services
     public class CompanyService:ICompanyService
     {
         private readonly IUnitOfWork _unitofwork;
+        private readonly IAttachService _attachService;
 
-        public CompanyService(IUnitOfWork unitofwork)
+        public CompanyService(IUnitOfWork unitofwork, IAttachService attachService)
         {
             _unitofwork = unitofwork;
+            _attachService = attachService;
         }
         public async Task<Guid> CreateCompany(AddCompanyCommand command)
         {
@@ -135,7 +138,7 @@ namespace JobBoardPlatfomr.Services.Services
             {
                 throw new PermisionException("this company does not belong to you", "company-400");
             }
-            CompanyDto result = new CompanyDto(company.Name,company.Description,company.Website,company.Location,company.Owner.FirstName +" " +company.Owner.LastName,company.CreatedAt,company.ModifiedAt);
+            CompanyDto result = new CompanyDto(company.Name,company.Description,company.Website,company.Location,company.Owner.FirstName +" " +company.Owner.LastName,company.CreatedAt,company.ModifiedAt,company.LogoId);
             return result;
         }
 
@@ -150,7 +153,56 @@ namespace JobBoardPlatfomr.Services.Services
             await _unitofwork.CompanyRepo.SaveChangesAsync();
         }
 
-       
+        public async Task<Guid> UploadCompanyLogo(Guid companyId, Guid requesterId, IFormFile file)
+        {
+            await _unitofwork.BeginTransactionAsync();
+            try
+            {
+                var company =await _unitofwork.CompanyRepo.GetByUserId(companyId);
+                if (company is null)
+                {
+                    throw new NotFoundException("company not found", "company-404");
+                }
+                if (!await IsAdmin(requesterId))
+                {
+                    if (company.UserId != requesterId)
+                    {
+                        throw new PermisionException("This company does not belong to you.", "company-403");
+                    }
+                }
+                var AttachId = await _attachService.UploadAsync(file);
+                if(company.LogoId != null)
+                {
+                    await _attachService.HardDeleteAttachmentAsync(company.LogoId.Value);
+                }
+                company.LogoId = AttachId;
+                await _unitofwork.SaveChangesAsync();
+                await _unitofwork.CommitTransactionAsync();
+                return AttachId;
+            }
+            catch (NotFoundException ex)
+            {
+                await _unitofwork.RollbackTransactionAsync();
+                throw ex;
+            }
+            catch (PermisionException ex)
+            {
+                await _unitofwork.RollbackTransactionAsync();
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                await _unitofwork.RollbackTransactionAsync();
+                throw ex;
+            }
+        }
+        private async Task<bool> IsAdmin(Guid requesterid)
+        {
+            var user = await _unitofwork.userManager.FindByIdAsync(requesterid.ToString());
+            return await _unitofwork.userManager.IsInRoleAsync(user, "Admin");
+        }
+
+
     }
    
 }

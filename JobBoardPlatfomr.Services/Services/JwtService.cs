@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -58,7 +59,7 @@ namespace JobBoardPlatfomr.Services.Services
                 issuer: _configuration["Jwt:Issuer"],
                 audience: _configuration["Jwt:Audience"],
                 claims: claims,
-                expires: DateTime.UtcNow.AddHours(2),
+                expires: DateTime.UtcNow.AddMinutes(int.Parse(_configuration["Jwt:TimeToLiveAccessToken"])),
                 signingCredentials: credentials
             );
 
@@ -77,6 +78,14 @@ namespace JobBoardPlatfomr.Services.Services
             {
                 return company.IsApproved;
             }
+        }
+        public async Task<string> GenerateRefreshToken(Guid userId)
+        {
+            var refreshtokenstring = Convert.ToBase64String(RandomNumberGenerator.GetBytes(64));
+            var refreshtoken = new RefreshToken(refreshtokenstring, userId, DateTime.UtcNow.AddMinutes(int.Parse(_configuration["Jwt:TimeToLiveRefreshToken"])));
+            await unitOfWork.RefreshTokenRepo.AddAsync(refreshtoken);
+            await unitOfWork.SaveChangesAsync();
+            return refreshtoken.Token;
         }
     }
 }

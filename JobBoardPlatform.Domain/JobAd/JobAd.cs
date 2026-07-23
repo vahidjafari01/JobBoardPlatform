@@ -1,5 +1,6 @@
 ﻿using JobBoardPlatform.Domain.Abstractions;
 using JobBoardPlatform.Domain.Applications;
+using JobBoardPlatform.Domain.Cities;
 using JobBoardPlatform.Domain.Companies;
 using JobBoardPlatform.Domain.enums;
 using JobBoardPlatform.Domain.JobCategories;
@@ -14,7 +15,7 @@ namespace JobBoardPlatform.Domain.entities
 {
     public class JobAd:BaseEntity
     {
-        public JobAd()
+        public JobAd() 
         {
             
         }
@@ -65,6 +66,7 @@ namespace JobBoardPlatform.Domain.entities
         public List<Payment>? Payments{ get; set; }
         public JobCategory Category{ get; set; }
         public Guid CategoryId { get; set; }
+        public City City { get; set; }
 
         public Guid CityId { get; set; }
         public List<string>? Skils { get; set; }

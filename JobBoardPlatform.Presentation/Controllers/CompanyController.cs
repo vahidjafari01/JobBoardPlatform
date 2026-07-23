@@ -55,6 +55,20 @@ namespace JobBoardPlatform.Presentation.Controllers
         }
 
 
+        [HttpPost("{companyId:guid}/logo")]
+        [Authorize(policy:"EmployerOrAdmin")]
+
+        public async Task<ActionResult<BaseResponseDto>> UploadCompanyLogo([FromRoute] Guid companyId,IFormFile file)
+        {
+            var user = User;
+            var requesterId = user.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            Guid.TryParse(requesterId, out var id);
+
+            var result =await _companyService.UploadCompanyLogo(companyId,id,file);
+            return Ok(new BaseResponseDto(result));
+        }
+
+
 
 
 

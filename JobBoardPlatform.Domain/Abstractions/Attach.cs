@@ -8,7 +8,7 @@ namespace JobBoardPlatform.Domain.Abstractions
 {
     public class Attach : BaseEntity
     {
-        public Attach()
+        private Attach()  //ef
         {
 
         }

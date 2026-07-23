@@ -4,6 +4,9 @@ using JobBoardPlatfomr.Services.IServices;
 using JobBoardPlatfomr.Services.OutPutDtos;
 using JobBoardPlatform.Domain.Abstractions;
 using JobBoardPlatform.Domain.Applications;
+using JobBoardPlatform.Domain.Companies;
+using JobBoardPlatform.Domain.enums;
+using JobBoardPlatform.Domain.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,10 +19,12 @@ namespace JobBoardPlatfomr.Services.Services
     public class ApplicationService:IApplicationService
     {
         private readonly IUnitOfWork _unitofWork;
+        private readonly IAttachService _attachService;
 
-        public ApplicationService(IUnitOfWork unitofWork)
+        public ApplicationService(IUnitOfWork unitofWork, IAttachService attachService)
         {
             _unitofWork = unitofWork;
+            _attachService = attachService;
         }
         public async Task<List<ApplicationDto>> GetAppsByJObAdId(ApplicationJobAdCommand command)
         {
@@ -81,6 +86,8 @@ namespace JobBoardPlatfomr.Services.Services
                     throw new PermisionException("this jobAd Does not belong to you", "jobAd-403");
                 }
             }
+            app.ReviewedAt = DateTime.UtcNow;
+            await _unitofWork.SaveChangesAsync();
             return new DetailAppDto { 
              AppId = app.Id,
              Email = app.User.Email,
@@ -92,7 +99,7 @@ namespace JobBoardPlatfomr.Services.Services
              Note = app.NoteWritenByUser,
             };
         }
-        public async Task ChangeApplicationStatusAsync(ChangeAppStatusCommand command)
+        public async Task<string> ChangeApplicationStatusAsync(ChangeAppStatusCommand command)
         {
             var app = await _unitofWork.ApplicationRepo.GetByIdAsync(command.AppId,true);
             if (app is null)
@@ -107,6 +114,15 @@ namespace JobBoardPlatfomr.Services.Services
             if (!company.IsApproved)
             {
                 throw new PermisionException("your company is not approved...", "company-403");
+            }
+            var jobad =await _unitofWork.JobAdsRepo.GetByIdAsync(app.JobAdId);
+            if (jobad == null)
+            {
+                throw new NotFoundException("jobad not found", "jobad-404");
+            }
+            if (jobad.Status != JobAdStatus.Published)
+            {
+                throw new BadRequestException("JobAd is not Active..you cant Change it");
             }
             if (!await IsAdmin(command.RequesterId))
             {
@@ -126,6 +142,7 @@ namespace JobBoardPlatfomr.Services.Services
             app.ModifiedAt = DateTime.UtcNow;
 
             await _unitofWork.ApplicationRepo.SaveChangesAsync();
+            return "succesfully Changed";
         }
 
         private void ValidateStatusTransition(ApplicationStatus currentStatus,ApplicationStatus targetStatus)
@@ -146,6 +163,118 @@ namespace JobBoardPlatfomr.Services.Services
             var user = await _unitofWork.userManager.FindByIdAsync(requesterid.ToString());
             return await _unitofWork.userManager.IsInRoleAsync(user, "Admin");
         }
+
+        public async Task<string> CreateApplicationAsync(CreateAppCommand cmd)
+        {
+            if (!await IsAdmin(cmd.RequesterId))
+            {
+                if (cmd.UserId != cmd.RequesterId)
+                {
+                    throw new PermisionException("This user does not belong to you.", "UserApplication-403");
+                }
+            }
+            var jobad = await _unitofWork.JobAdsRepo.GetByIdAsync(cmd.jobAdID);
+            if (jobad == null)
+            {
+                throw new NotFoundException("JobAd not found.", "JobAd-404");
+            }
+
+            if (jobad.Status != JobAdStatus.Published)
+            {
+                throw new PermisionException("JobAd is not active.", "JobAd-403");
+            }
+
+          
+
+
+            if (await _unitofWork.ApplicationRepo.AlreadyExsist(cmd.UserId,cmd.jobAdID))
+            {
+                throw new BadRequestException("You have already applied for this job.");
+            }
+
+            var app = new Application(ApplicationStatus.Submitted, cmd.jobAdID, cmd.UserId, cmd.Note);
+
+            await _unitofWork.ApplicationRepo.AddAsync(app);
+            await _unitofWork.SaveChangesAsync();
+            return "succesfully Created";
+        }
+
+        public async Task<List<AppDtoForCustomer>> GetAppsForJobSeekerAsync(Guid UserId,Guid RequesterId)
+        {
+            if (!await IsAdmin(RequesterId))
+            {
+                if (UserId != RequesterId)
+                {
+                    throw new PermisionException("This user does not belong to you.", "UserApplication-403");
+                }
+            }
+
+            var apps =await _unitofWork.ApplicationRepo.GetJoinedApps(UserId);
+            return apps.Select(a => new AppDtoForCustomer(a.Id,a.JObAd.Company.Name,a.JObAd.Title,a.JobAdId)).ToList();
+        }
+        public async Task<AppDetailForJobSeeker> GetAppDetailForJobSeekerAsync(Guid RequesterId,Guid appid)
+        {
+            var app = await _unitofWork.ApplicationRepo.GetDetailAppbyIdAsync(appid);
+            if(app == null)
+            {
+                throw new NotFoundException("Application not found","Application-404");
+            }
+            if (!await IsAdmin(RequesterId))
+            {
+                if (app.UserId != RequesterId)
+                {
+                    throw new PermisionException("This user does not belong to you.", "UserApplication-403");
+                }
+            }
+            return new AppDetailForJobSeeker(app.JobAdId,app.Id,app.Status.ToString(),app.ReviewedAt,app.CreatedAt,app.NoteWritenByUser);
+        }
+        public async Task<string> CancellMyApp(Guid requesterId,Guid appId)
+        {
+
+            var app = await _unitofWork.ApplicationRepo.GetDetailAppbyIdAsync(appId);
+            if (app == null)
+            {
+                throw new NotFoundException("Application not found", "Application-404");
+            }
+            if (!await IsAdmin(requesterId))
+            {
+                if (app.UserId != requesterId)
+                {
+                    throw new PermisionException("This App does not belong to you.", "UserApplication-403");
+                }
+            }
+            if(app.Status != ApplicationStatus.Submitted)
+            {
+                throw new BadRequestException("the Application has been seen by Company and you cant edit it");
+            }
+            app.Status = ApplicationStatus.canceled;
+            await _unitofWork.SaveChangesAsync();
+            return "succesfully Canceled";
+
+
+
+        }
+        public async Task<AttachOutputDto> GetResumeAsync(Guid requesterId,Guid appId)
+        {
+            var app =await _unitofWork.ApplicationRepo.GetJoinedAppByAppId(appId);
+            if(app is null)
+            {
+                throw new NotFoundException("Application was not found","application_404");
+            }
+            if(! await IsAdmin(requesterId))
+            {
+                if(app.JObAd.Company.UserId != requesterId)
+                {
+                    throw new PermisionException("this Application Resume does not blong to you and you cant see that","resume-403");
+                }
+            }
+            if(app.User.ResumeId is null)
+            {
+                throw new NotFoundException("resume not found...the user has deleted her/his resume","Resume-404");
+            }
+            return await _attachService.DownloadAsync(app.User.ResumeId.Value);
+        }
+
 
     }
 }

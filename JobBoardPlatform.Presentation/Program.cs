@@ -107,6 +107,7 @@ builder.Services.AddScoped<IJobAdServices,JobAdService>();
 builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IJwtService, JwtService>();
+builder.Services.AddScoped<IAttachService, AttachService>();
 builder.Services.AddScoped<GlobalExceptionHandlerMiddleware>();
 
 

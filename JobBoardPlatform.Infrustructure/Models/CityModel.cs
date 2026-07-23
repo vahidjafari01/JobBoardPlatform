@@ -13,7 +13,7 @@ namespace JobBoardPlatform.Infrustructure.Models
     {
         public void Configure(EntityTypeBuilder<City> builder)
         {
-            builder.HasMany(c => c.JobAds).WithOne().HasForeignKey(j => j.CityId);
+            builder.HasMany(c => c.JobAds).WithOne(j => j.City).HasForeignKey(j => j.CityId);
             builder.HasMany(c => c.Companies).WithOne().HasForeignKey(c => c.CityId);
         }
     }

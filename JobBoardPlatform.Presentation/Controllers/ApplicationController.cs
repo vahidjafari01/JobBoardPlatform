@@ -59,8 +59,61 @@ namespace JobBoardPlatform.Presentation.Controllers
 
             var requesterId = user.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             Guid.TryParse(requesterId, out var id);
-            await _applicationService.ChangeApplicationStatusAsync(new ChangeAppStatusCommand(id,appId,command.Status));
-            return Ok(new BaseResponseDto("Changed succesfully"));
+            var result =await _applicationService.ChangeApplicationStatusAsync(new ChangeAppStatusCommand(id,appId,command.Status));
+            return Ok(new BaseResponseDto(result));
+        }
+        [HttpPost]
+        [Authorize]
+
+        public async Task<ActionResult<BaseResponseDto>> MakeApplication([FromBody] CreateAppCmd cmd)
+        {
+
+            var user = User;
+
+            var requesterId = user.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            Guid.TryParse(requesterId, out var id);
+            var command = new CreateAppCommand(cmd.UserId,id,cmd.jobAdID,cmd.Note);
+            var result = await _applicationService.CreateApplicationAsync(command);
+            return Ok(new BaseResponseDto(result));
+        }
+        [HttpGet("GetByUserId/{userId:guid}")]
+        [Authorize]
+
+        public async Task<ActionResult<BaseResponseDto>> GetMyApps([FromRoute] Guid userId )
+        {
+
+            var user = User;
+
+            var requesterId = user.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            Guid.TryParse(requesterId, out var id);
+            var result = await _applicationService.GetAppsForJobSeekerAsync(userId,id);
+            return Ok(new BaseResponseDto(result));
+        }
+        [HttpGet("GetMyAppDetail/{appId:guid}")]
+        [Authorize]
+
+        public async Task<ActionResult<BaseResponseDto>> GetAppDetailForJobSeekerAsync([FromRoute] Guid appId )
+        {
+
+            var user = User;
+
+            var requesterId = user.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            Guid.TryParse(requesterId, out var id);
+            var result = await _applicationService.GetAppDetailForJobSeekerAsync(id,appId);
+            return Ok(new BaseResponseDto(result));
+        }
+
+        [HttpPatch("{appId:guid}")]
+        [Authorize]
+        public async Task<ActionResult<BaseResponseDto>> CancellMyApp([FromRoute] Guid appId)
+        {
+
+            var user = User;
+
+            var requesterId = user.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            Guid.TryParse(requesterId, out var id);
+            var result = await _applicationService.CancellMyApp(id,appId);
+            return Ok(new BaseResponseDto(result));
 
         }
 

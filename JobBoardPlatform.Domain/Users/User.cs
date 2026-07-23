@@ -37,12 +37,12 @@ namespace JobBoardPlatform.Domain.Users
         public DateTime CreatedAt { get ; set ; } = DateTime.UtcNow;
         public DateTime ModifiedAt { get ; set ; }
         public bool IsDeleted { get; set; } = false;
-        public Guid? ProfilePhotoId{ get; set; }
         public Guid? ResumeId{ get; set; }
 
-        public Attach? ProfilePhoto{ get; set; }
+        public Attach? ResumeFile{ get; set; }
 
         public Company? Company { get; set; }
         public List<Application>? Applications{ get; set; }
+        public List<RefreshToken> RefreshTokens { get; set; }
     }
 }

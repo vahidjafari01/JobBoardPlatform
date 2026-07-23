@@ -31,7 +31,8 @@ namespace JobBoardPlatfomr.Services.OutPutDtos
 
 
     public record AuthResponseDto(
-        string? Token,
+        string? AccessTokenToken,
+        string? RefreshToken,
         string Message,
         Guid UserId
         );

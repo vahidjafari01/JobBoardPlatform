@@ -12,7 +12,13 @@ namespace JobBoardPlatfomr.Services.IServices
     {
         Task<List<ApplicationDto>> GetAppsByJObAdId(ApplicationJobAdCommand command);
         Task<DetailAppDto> GetDetailApp(AppDetailCommand command);
-        Task ChangeApplicationStatusAsync(ChangeAppStatusCommand command);
+        Task<string> ChangeApplicationStatusAsync(ChangeAppStatusCommand command);
+        Task<string> CreateApplicationAsync(CreateAppCommand cmd);
+        Task<string> CancellMyApp(Guid requesterId, Guid appId);
+
+        Task<AppDetailForJobSeeker> GetAppDetailForJobSeekerAsync(Guid RequesterId, Guid appid);
+        Task<List<AppDtoForCustomer>> GetAppsForJobSeekerAsync(Guid UserId, Guid RequesterId);
+        
 
     }
 }

@@ -20,6 +20,9 @@ namespace JobBoardPlatfomr.Services.IServices
         Task ActiveMyJObAd(ActiveJobAdCommand command);
         Task ArchiveMyJobAd(ArchiveMyJobAdCommand command);
         Task<JobAdDetail> GetDetailJobAd(GetJObAdDetailCommand command);
+        Task<List<JobAdViewModel>> GetJobAdsForCustomersAsync(GetJObAdFilterCommand cmd, Paging paging);
+
+        Task<JobAdDetailForCustomer> GetJobAdDetailForCustomerAsync(Guid JobAdId);
 
 
     }

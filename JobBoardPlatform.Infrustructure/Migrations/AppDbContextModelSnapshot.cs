@@ -60,9 +60,6 @@ namespace JobBoardPlatform.Infrustructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("InterviewAt")
-                        .HasColumnType("datetime2");
-
                     b.Property<Guid>("JobAdId")
                         .HasColumnType("uniqueidentifier");
 
@@ -162,7 +159,9 @@ namespace JobBoardPlatform.Infrustructure.Migrations
 
                     b.HasIndex("CityId");
 
-                    b.HasIndex("LogoId");
+                    b.HasIndex("LogoId")
+                        .IsUnique()
+                        .HasFilter("[LogoId] IS NOT NULL");
 
                     b.HasIndex("UserId")
                         .IsUnique();
@@ -283,6 +282,41 @@ namespace JobBoardPlatform.Infrustructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Provinces");
+                });
+
+            modelBuilder.Entity("JobBoardPlatform.Domain.Users.RefreshToken", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ExpiredAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("ModifiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Token")
+                        .IsUnique();
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("RefreshTokens");
                 });
 
             modelBuilder.Entity("JobBoardPlatform.Domain.Users.RoleEntity", b =>
@@ -411,9 +445,6 @@ namespace JobBoardPlatform.Infrustructure.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<Guid?>("ProfilePhotoId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid?>("ResumeId")
                         .HasColumnType("uniqueidentifier");
 
@@ -437,9 +468,9 @@ namespace JobBoardPlatform.Infrustructure.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.HasIndex("ProfilePhotoId")
+                    b.HasIndex("ResumeId")
                         .IsUnique()
-                        .HasFilter("[ProfilePhotoId] IS NOT NULL");
+                        .HasFilter("[ResumeId] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
                 });
@@ -659,8 +690,9 @@ namespace JobBoardPlatform.Infrustructure.Migrations
                         .IsRequired();
 
                     b.HasOne("JobBoardPlatform.Domain.Abstractions.Attach", "Logo")
-                        .WithMany()
-                        .HasForeignKey("LogoId");
+                        .WithOne()
+                        .HasForeignKey("JobBoardPlatform.Domain.Companies.Company", "LogoId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("JobBoardPlatform.Domain.Users.User", "Owner")
                         .WithOne("Company")
@@ -684,13 +716,24 @@ namespace JobBoardPlatform.Infrustructure.Migrations
                     b.Navigation("JobAd");
                 });
 
+            modelBuilder.Entity("JobBoardPlatform.Domain.Users.RefreshToken", b =>
+                {
+                    b.HasOne("JobBoardPlatform.Domain.Users.User", "User")
+                        .WithMany("RefreshTokens")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("JobBoardPlatform.Domain.Users.User", b =>
                 {
-                    b.HasOne("JobBoardPlatform.Domain.Abstractions.Attach", "ProfilePhoto")
+                    b.HasOne("JobBoardPlatform.Domain.Abstractions.Attach", "ResumeFile")
                         .WithOne()
-                        .HasForeignKey("JobBoardPlatform.Domain.Users.User", "ProfilePhotoId");
+                        .HasForeignKey("JobBoardPlatform.Domain.Users.User", "ResumeId");
 
-                    b.Navigation("ProfilePhoto");
+                    b.Navigation("ResumeFile");
                 });
 
             modelBuilder.Entity("JobBoardPlatform.Domain.entities.JobAd", b =>
@@ -701,7 +744,7 @@ namespace JobBoardPlatform.Infrustructure.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("JobBoardPlatform.Domain.Cities.City", null)
+                    b.HasOne("JobBoardPlatform.Domain.Cities.City", "City")
                         .WithMany("JobAds")
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -714,6 +757,8 @@ namespace JobBoardPlatform.Infrustructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
+
+                    b.Navigation("City");
 
                     b.Navigation("Company");
                 });
@@ -796,6 +841,8 @@ namespace JobBoardPlatform.Infrustructure.Migrations
                     b.Navigation("Applications");
 
                     b.Navigation("Company");
+
+                    b.Navigation("RefreshTokens");
                 });
 
             modelBuilder.Entity("JobBoardPlatform.Domain.entities.JobAd", b =>
