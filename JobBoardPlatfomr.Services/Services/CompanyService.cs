@@ -158,7 +158,7 @@ namespace JobBoardPlatfomr.Services.Services
             await _unitofwork.BeginTransactionAsync();
             try
             {
-                var company =await _unitofwork.CompanyRepo.GetByUserId(companyId);
+                var company =await _unitofwork.CompanyRepo.GetByIdAsync(companyId);
                 if (company is null)
                 {
                     throw new NotFoundException("company not found", "company-404");

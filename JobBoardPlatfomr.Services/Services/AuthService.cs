@@ -52,9 +52,15 @@ namespace JobBoardPlatfomr.Services.Services
 
             var token =await _jwtService.GenerateTokenAsync(user, roles);
             var refreshToken = await _jwtService.GenerateRefreshToken(user.Id);
+            Guid? companyId = null;
+            if (roles.Contains("Employer"))
+            {
+                var company = await _unitOfWork.CompanyRepo.GetByUserId(user.Id);
+                companyId = company.Id;
+            }
 
 
-            return new AuthResponseDto(token,refreshToken, $"welcome {user.FirstName + " " + user.LastName}", user.Id);
+            return new AuthResponseDto(token,refreshToken, $"welcome {user.FirstName + " " + user.LastName}", user.Id,companyId);
 
         }
 
@@ -96,7 +102,7 @@ namespace JobBoardPlatfomr.Services.Services
                 var refreshToken = await _jwtService.GenerateRefreshToken(user.Id);
                 await _unitOfWork.CommitTransactionAsync();
 
-                return new AuthResponseDto(token, refreshToken, $"welcome {user.FirstName + " " + user.LastName}", user.Id);
+                return new AuthResponseDto(token, refreshToken, $"welcome {user.FirstName + " " + user.LastName}", user.Id,null);
             }catch(Exception ex)
             {
                 await _unitOfWork.RollbackTransactionAsync();
@@ -110,7 +116,7 @@ namespace JobBoardPlatfomr.Services.Services
             await _unitOfWork.BeginTransactionAsync();
             try
             {
-                await companyService.CreateCompany(command);
+                var companyId = await companyService.CreateCompany(command);
 
 
                 var user = await _userManager.FindByIdAsync(command.UserId.ToString());
@@ -121,7 +127,7 @@ namespace JobBoardPlatfomr.Services.Services
                 var token = await _jwtService.GenerateTokenAsync(user, roles);
                 var refreshToken = await _jwtService.GenerateRefreshToken(user.Id);
                 await _unitOfWork.CommitTransactionAsync();
-                return new AuthResponseDto(token, refreshToken, $"welcome {user.FirstName + " " + user.LastName}", user.Id);
+                return new AuthResponseDto(token, refreshToken, $"welcome {user.FirstName + " " + user.LastName}", user.Id, companyId);
 
             }
             catch (Exception ex) 
