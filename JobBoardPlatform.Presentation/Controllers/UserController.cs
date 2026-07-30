@@ -34,6 +34,7 @@ namespace JobBoardPlatform.Presentation.Controllers
 
         [HttpPut("{userId:guid}")]
         [Authorize]
+        [Authorize(policy: "IsActive")]
         public async Task<ActionResult<BaseResponseDto>> EditMyProfile([FromRoute] Guid userId, [FromForm] UpdateProfileCmd cmd)
         {
             var user = User;
@@ -59,6 +60,7 @@ namespace JobBoardPlatform.Presentation.Controllers
         }
         [HttpPut("{userId:guid}/Resume")]
         [Authorize]
+        [Authorize(policy: "IsActive")]
         public async Task<ActionResult<BaseResponseDto>> UploadResume([FromRoute] Guid userId, [FromBody] IFormFile file)
         {
             var user = User;

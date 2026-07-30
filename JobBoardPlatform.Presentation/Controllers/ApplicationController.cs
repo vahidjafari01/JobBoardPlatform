@@ -37,7 +37,7 @@ namespace JobBoardPlatform.Presentation.Controllers
         }
         [HttpGet("{AppId:guid}")]
         [Authorize(Policy = "EmployerOrAdmin")]
-
+        [Authorize(policy: "IsActive")]
         public async Task<ActionResult<BaseResponseDto>> GetApplicationDetail([FromRoute] Guid AppId)
         {
             var user = User;
@@ -51,6 +51,7 @@ namespace JobBoardPlatform.Presentation.Controllers
         }
         [HttpPut("ChangeApplicationState/{appId:guid}")]
         [Authorize(Policy = "EmployerOrAdmin")]
+        [Authorize(policy: "IsActive")]
 
         public async Task<ActionResult<BaseResponseDto>> ChangeAppState([FromRoute] Guid appId, [FromBody] AppStatusCommand command)
         {
@@ -64,6 +65,7 @@ namespace JobBoardPlatform.Presentation.Controllers
         }
         [HttpPost]
         [Authorize]
+        [Authorize(policy: "IsActive")]
 
         public async Task<ActionResult<BaseResponseDto>> MakeApplication([FromBody] CreateAppCmd cmd)
         {
@@ -105,6 +107,7 @@ namespace JobBoardPlatform.Presentation.Controllers
 
         [HttpPatch("{appId:guid}")]
         [Authorize]
+        [Authorize(policy: "IsActive")]
         public async Task<ActionResult<BaseResponseDto>> CancellMyApp([FromRoute] Guid appId)
         {
 

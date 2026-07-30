@@ -1,4 +1,5 @@
 ﻿using JobBoardPlatform.Domain.Applications;
+using JobBoardPlatform.Domain.enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using System;
@@ -30,6 +31,10 @@ namespace JobBoardPlatform.Infrustructure.Repositories
         public async Task<Application?> GetJoinedAppByAppId(Guid appId)
         {
             return await _context.Applications.Include(a => a.User).Include(a => a.JObAd).ThenInclude(j => j.Company).FirstOrDefaultAsync(a => a.Id == appId);
+        }
+        public async Task<int> GetAppsCountByStatusAsync(ApplicationStatus status)
+        {
+            return await _context.Applications.CountAsync(a => a.Status == status);
         }
     }
 }

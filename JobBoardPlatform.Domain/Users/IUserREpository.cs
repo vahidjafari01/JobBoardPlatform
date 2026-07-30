@@ -22,5 +22,8 @@ namespace JobBoardPlatform.Domain.Users
         Task SaveChangesAsync();
         Task AddAsync(User entity);
         Task<List<User>> GetAllAsync();
+        Task<List<UserDto>> GetJobSeekers(int take, int skip);
+        Task<int> GetJobSeekerCount();
+        Task<int> GetEmployerCount();
     }
 }

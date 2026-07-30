@@ -65,13 +65,12 @@ namespace JobBoardPlatform.Infrustructure.Repositories
             return Task.CompletedTask;
         }
 
-        public async Task<List<T>> Pagination(Expression<Func<T, bool>> predicate, Paging paging, bool tracking = false)
+        public async Task<List<T>> Pagination(Paging paging, bool tracking = false)
         {
             var query = _context.Set<T>().AsQueryable();
 
             if (!tracking) query = query.AsNoTracking();
             return await query
-                .Where(predicate)
                 .Skip(paging.Skip)
                 .Take(paging.PageSize)
                 .OrderByDescending(e => e.CreatedAt)

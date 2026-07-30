@@ -23,6 +23,7 @@ namespace JobBoardPlatform.Presentation.Controllers
 
         [HttpGet("{companyId:guid}")]
         [Authorize(policy:"EmployerOrAdmin")]
+        [Authorize(policy: "IsActive")]
         public async Task<ActionResult<BaseResponseDto>> GetMyCompanyDetail([FromRoute] Guid companyId)
         {
             var user = User;
@@ -35,6 +36,7 @@ namespace JobBoardPlatform.Presentation.Controllers
         }
         [HttpPut("{companyId:guid}")]
         [Authorize(policy: "EmployerOrAdmin")]
+        [Authorize(policy: "IsActive")]
 
         public async Task<ActionResult<BaseResponseDto>> EditMyProfileCompany([FromRoute] Guid companyId, [FromBody] UpdateCompanyDto cmd)
         {
@@ -46,17 +48,13 @@ namespace JobBoardPlatform.Presentation.Controllers
             await _companyService.UpdateCompanyAsync(command);
             return Ok(new BaseResponseDto("succesfully updated"));
         }
-        [HttpPut("ApproveCompany/{companyId:guid}")]
-        [Authorize(Roles ="Admin")]
-        public async Task<ActionResult<BaseResponseDto>> ApproveCompany([FromRoute] Guid companyId)
-        {
-            await _companyService.SetApprovedCompanyAsync(companyId);
-            return Ok(new BaseResponseDto("succesfully Approved"));
-        }
+        
+       
 
 
         [HttpPost("{companyId:guid}/logo")]
         [Authorize(policy:"EmployerOrAdmin")]
+        [Authorize(policy: "IsActive")]
 
         public async Task<ActionResult<BaseResponseDto>> UploadCompanyLogo([FromRoute] Guid companyId,IFormFile file)
         {

@@ -13,5 +13,6 @@ namespace JobBoardPlatform.Domain.Applications
         Task<bool> AlreadyExsist(Guid userId, Guid JobadId);
         Task<List<Application>> GetJoinedApps(Guid userId);
         Task<Application?> GetJoinedAppByAppId(Guid appId);
+        Task<int> GetAppsCountByStatusAsync(ApplicationStatus status);
     }
 }

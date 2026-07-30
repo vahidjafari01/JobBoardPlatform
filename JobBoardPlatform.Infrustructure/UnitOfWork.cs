@@ -20,6 +20,7 @@ namespace JobBoardPlatform.Infrustructure
 {
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore.Storage;
+    using Microsoft.Extensions.Configuration;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -37,6 +38,7 @@ namespace JobBoardPlatform.Infrustructure
         public INotificationRepo NotificationsRepo { get; }
         public IPaymentRepository PaymentsRepo { get; }
         public IAttachRepo AttacheRepo { get; }
+        public IConfiguration configuration;
 
         public IApplicationREpository ApplicationRepo { get; }
         public IRefreshTokenRepo RefreshTokenRepo{ get; }
@@ -44,13 +46,14 @@ namespace JobBoardPlatform.Infrustructure
         public RoleManager<RoleEntity> roleManager{ get; }
 
 
-        public UnitOfWork(AppDbContext appDbContext, RoleManager<RoleEntity> roleManager, UserManager<User> userManager)
+        public UnitOfWork(AppDbContext appDbContext, RoleManager<RoleEntity> roleManager, UserManager<User> userManager, IConfiguration configuration)
         {
             _appDbContext = appDbContext;
             this.roleManager = roleManager;
             this.userManager = userManager;
+            this.configuration = configuration;
 
-            UserRepo = new UserRepository(appDbContext);
+            UserRepo = new UserRepository(appDbContext,configuration);
             CompanyRepo = new CompanyRepo(appDbContext);
             CityRepo = new CityRepo(appDbContext);
             ProvinceRepo = new ProvinceRepo(appDbContext);

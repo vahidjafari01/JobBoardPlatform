@@ -41,7 +41,7 @@ namespace JobBoardPlatfomr.Services.Services
             {
                 throw new NotFoundException("User Not found","user-404");
             }
-            return new UserProfileDto(user.UserName,user.Email,user.FirstName,user.LastName,user.CreatedAt,user.ResumeId);
+            return new UserProfileDto(user.UserName,user.Email,user.FirstName,user.LastName,user.CreatedAt,user.ResumeId,user.IsActive);
         }
         private async Task<bool> IsAdmin(Guid requesterid)
         {

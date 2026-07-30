@@ -13,6 +13,26 @@ namespace JobBoardPlatfomr.Services.OutPutDtos
 {
     public record JobAdDto
     {
+        public JobAdDto(string title, string description, string? location, TimeSpan startWorkTime, TimeSpan endWorkTIme, decimal? salaryMin, decimal? salaryMax, bool isFeatured, string status, string employementType, Guid companyId, List<string>? skils)
+        {
+            Title = title;
+            Description = description;
+            Location = location;
+            StartWorkTime = startWorkTime;
+            EndWorkTIme = endWorkTIme;
+            SalaryMin = salaryMin;
+            SalaryMax = salaryMax;
+            IsFeatured = isFeatured;
+            Status = status;
+            EmployementType = employementType;
+            CompanyId = companyId;
+            Skils = skils;
+        }
+        public JobAdDto()
+        {
+            
+        }
+
         public string Title { get; set; } = null!;
         public string Description { get; set; } = null!;
         public string? Location { get; set; }

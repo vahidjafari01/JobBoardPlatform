@@ -134,24 +134,19 @@ namespace JobBoardPlatfomr.Services.Services
             {
                 throw new NotFoundException("company was not found ", "Company-404");
             }
-            if (company.UserId != user.Id)
+            if (!await IsAdmin(command.RequesterId))
             {
-                throw new PermisionException("this company does not belong to you", "company-400");
+                if (company.UserId != user.Id)
+                {
+                    throw new PermisionException("this company does not belong to you", "company-400");
+                }
             }
+            
             CompanyDto result = new CompanyDto(company.Name,company.Description,company.Website,company.Location,company.Owner.FirstName +" " +company.Owner.LastName,company.CreatedAt,company.ModifiedAt,company.LogoId);
             return result;
         }
 
-        public async Task SetApprovedCompanyAsync(Guid companyId)
-        {
-            var company =await _unitofwork.CompanyRepo.GetByIdAsync(companyId,true);
-            if (company is null)
-            {
-                throw new NotFoundException("company not found","company-404");
-            }
-            company.IsApproved = true;
-            await _unitofwork.CompanyRepo.SaveChangesAsync();
-        }
+       
 
         public async Task<Guid> UploadCompanyLogo(Guid companyId, Guid requesterId, IFormFile file)
         {

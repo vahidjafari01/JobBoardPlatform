@@ -11,7 +11,7 @@ namespace JobBoardPlatform.Domain.Abstractions
     public interface IGenericRepository<T> where T : BaseEntity
     {
         Task<List<T>> QueryAsync(Expression<Func<T, bool>> condition, bool tracking = false);
-        Task<List<T>> Pagination(Expression<Func<T, bool>> predicate,Paging paging,bool tracking = false);
+        Task<List<T>> Pagination(Paging paging,bool tracking = false);
 
         Task<T?> GetByIdAsync(Guid id, bool tracking = false);
 

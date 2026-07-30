@@ -25,6 +25,7 @@ namespace JobBoardPlatform.Infrustructure.Models
             builder.Property(u => u.FirstName).HasColumnType("nvarchar(30)");
             builder.Property(u => u.LastName).HasColumnType("nvarchar(30)");
             builder.HasMany(u => u.RefreshTokens).WithOne(r => r.User).HasForeignKey(r => r.UserId).OnDelete(DeleteBehavior.Cascade);
+            builder.Property(u => u.IsActive).HasDefaultValue(true);
             
         }
     }

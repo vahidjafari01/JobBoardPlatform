@@ -14,7 +14,6 @@ namespace JobBoardPlatfomr.Services.IServices
         Task<Guid> CreateCompany(AddCompanyCommand command);
         Task UpdateCompanyAsync(UpdateCompanyComand command);
         Task<CompanyDto> GetMyCompanyDetailAsync(GetCompanyDetailCommand command);
-        Task SetApprovedCompanyAsync(Guid companyId);
 
         Task<Guid> UploadCompanyLogo(Guid companyId, Guid requesterId, IFormFile file);
     }

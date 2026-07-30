@@ -26,6 +26,7 @@ namespace JobBoardPlatform.Presentation.Controllers
 
         [HttpPost]
         [Authorize(Roles ="Employer")]
+        [Authorize(policy: "IsActive")]
 
         public async Task<ActionResult<BaseResponseDto>> CreateJobAd([FromBody] CreateJobAdCommand cmd)
         {
@@ -39,6 +40,7 @@ namespace JobBoardPlatform.Presentation.Controllers
         }
         [HttpPut("{jobAdId:guid}")]
         [Authorize(policy: "EmployerOrAdmin")]
+        [Authorize(policy: "IsActive")]
 
 
         public async Task<ActionResult<BaseResponseDto>> EditJObAd([FromRoute] Guid jobAdId, [FromBody] JobAdEditCommand cmd)
@@ -53,6 +55,7 @@ namespace JobBoardPlatform.Presentation.Controllers
         }
         [HttpDelete("{JobAdId:guid}")]
         [Authorize(policy: "EmployerOrAdmin")]
+        [Authorize(policy: "IsActive")]
 
 
         public async Task<ActionResult<BaseResponseDto>> DeleteJobAd([FromRoute] Guid JobAdId)
@@ -65,7 +68,7 @@ namespace JobBoardPlatform.Presentation.Controllers
         }
         [HttpGet("CompanyJobAds/{companyId:guid}")]
         [Authorize(policy: "EmployerOrAdmin")]
-
+        [Authorize(policy: "IsActive")]
 
         public async Task<ActionResult<BaseResponseDto>> GetMyCompanyJobAds([FromRoute]Guid companyId)
         {
@@ -79,7 +82,7 @@ namespace JobBoardPlatform.Presentation.Controllers
         }
         [HttpGet("{jobadId:guid}")]
         [Authorize(policy: "EmployerOrAdmin")]
-
+        [Authorize(policy: "IsActive")]
 
         public async Task<ActionResult<BaseResponseDto>> GetDetailJobAds([FromRoute] Guid jobAdId)
         {
@@ -93,6 +96,7 @@ namespace JobBoardPlatform.Presentation.Controllers
         }
         [HttpPut("Activate/{jobAdId:guid}")]
         [Authorize(policy: "EmployerOrAdmin")]
+        [Authorize(policy: "IsActive")]
 
         public async Task<ActionResult<BaseResponseDto>> ActiveJobAd([FromRoute] Guid jobAdId)
         {
@@ -106,7 +110,7 @@ namespace JobBoardPlatform.Presentation.Controllers
         }
         [HttpPut("Archived/{jobAdId:guid}")]
         [Authorize(policy: "EmployerOrAdmin")]
-
+        [Authorize(policy: "IsActive")]
         public async Task<ActionResult<BaseResponseDto>> ArchiveJobAdId([FromRoute] Guid jobAdId)
         {
             var user = User;

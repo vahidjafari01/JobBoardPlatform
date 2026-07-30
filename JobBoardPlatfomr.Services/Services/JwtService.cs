@@ -47,6 +47,10 @@ namespace JobBoardPlatfomr.Services.Services
                     }
                 }
             }
+            if (user.IsActive)
+            {
+                claims.Add(new Claim("IsActive","true"));
+            }
             
             
 

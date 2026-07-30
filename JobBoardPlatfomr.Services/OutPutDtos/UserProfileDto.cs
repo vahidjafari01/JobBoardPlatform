@@ -9,7 +9,7 @@ namespace JobBoardPlatfomr.Services.OutPutDtos
 {
     public record UserProfileDto
     {
-        public UserProfileDto(string username, string email, string firstName, string lastName, DateTime createdAt, Guid? resumeId)
+        public UserProfileDto(string username, string email, string firstName, string lastName, DateTime createdAt, Guid? resumeId, bool isActive)
         {
             Username = username;
             Email = email;
@@ -17,12 +17,14 @@ namespace JobBoardPlatfomr.Services.OutPutDtos
             LastName = lastName;
             CreatedAt = createdAt;
             ResumeId = resumeId;
+            IsActive = isActive;
         }
 
         public string Username { get; set; }
         public string Email { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public bool IsActive{ get; set; }
         public DateTime CreatedAt{ get; set; }
         public Guid? ResumeId{ get; set; }
       

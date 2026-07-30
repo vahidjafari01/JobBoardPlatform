@@ -5,6 +5,7 @@ using JobBoardPlatfomr.Services.OutPutDtos;
 using JobBoardPlatform.Domain.Abstractions;
 using JobBoardPlatform.Domain.entities;
 using JobBoardPlatform.Domain.enums;
+using JobBoardPlatform.Domain.Payments;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -363,6 +364,68 @@ namespace JobBoardPlatfomr.Services.Services
                 jobad.Company.LogoId,jobad.Company.Name,
                 jobad.Company.Description,jobad.Company.Website,
                 jobad.Company.Location);
+        }
+        public async Task<string> MakePlusJobAd(Guid JobAdId,Guid requesterId)
+        {
+            var company =await _unitofwork.CompanyRepo.GetByUserId(requesterId);
+            if (company == null)
+            {
+                throw new NotFoundException("the user company not found","company-404");
+            }
+            var jobad =await _unitofwork.JobAdsRepo.GetByIdAsync(JobAdId,true);
+            if (jobad == null)
+            {
+                throw new NotFoundException("the jobAd not found", "jobAd-404");
+            }
+            if (jobad.CompanyId != company.Id)
+            {
+                throw new PermisionException("this jobAD does not belong to you","403");
+            }
+            if (jobad.FeaturePriority == 2)
+            {
+                throw new BadRequestException("the jobAd is already plus");
+            }
+            if (jobad.FeaturePriority == 1)
+            {
+                throw new BadRequestException("the jobAd is already pro");
+            }
+            var payment = new Payment(jobad.Id,200000,PaymentStatus.Paid,"shaparak","1297387635",DateTime.UtcNow);
+            await _unitofwork.PaymentsRepo.AddAsync(payment);
+            jobad.FeaturePriority = 2;
+            jobad.IsFeatured = true;
+            jobad.FeaturedUntil = DateTime.UtcNow.AddDays(3);
+            await _unitofwork.SaveChangesAsync();
+            return "sucessfully Converted to plus";
+
+        }
+        public async Task<string> MakeProJobAd(Guid JobAdId, Guid requesterId)
+        {
+            var company = await _unitofwork.CompanyRepo.GetByUserId(requesterId);
+            if (company == null)
+            {
+                throw new NotFoundException("the user company not found", "company-404");
+            }
+            var jobad = await _unitofwork.JobAdsRepo.GetByIdAsync(JobAdId, true);
+            if (jobad == null)
+            {
+                throw new NotFoundException("the jobAd not found", "jobAd-404");
+            }
+            if (jobad.CompanyId != company.Id)
+            {
+                throw new PermisionException("this jobAD does not belong to you", "403");
+            }
+            if (jobad.FeaturePriority == 1)
+            {
+                throw new BadRequestException("the jobAd is already pro");
+            }
+            var payment = new Payment(jobad.Id, 300000, PaymentStatus.Paid, "shaparak", "1297387635", DateTime.UtcNow);
+            await _unitofwork.PaymentsRepo.AddAsync(payment);
+            jobad.FeaturePriority = 1;
+            jobad.IsFeatured = true;
+            jobad.FeaturedUntil = DateTime.UtcNow.AddDays(3);
+            await _unitofwork.SaveChangesAsync();
+            return "sucessfully Converted to pro";
+
         }
 
 

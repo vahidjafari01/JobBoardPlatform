@@ -21,5 +21,7 @@ namespace JobBoardPlatform.Domain.entities
         Task<List<JobAd>> GetJobAdsBYFilter(GetJobAdCommand command, int take, int skip);
 
         Task<JobAd?> GetJoinedJobAd(Guid JobAdId);
+        Task<int> ActiveJobAdCount();
+        Task<int> DeactiveJobAdCount();
     }
 }

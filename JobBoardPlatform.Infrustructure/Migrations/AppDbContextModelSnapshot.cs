@@ -409,6 +409,11 @@ namespace JobBoardPlatform.Infrustructure.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(30)");
 
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")

@@ -66,6 +66,7 @@ builder.Services.AddAuthorization
     (opt =>
     {
         opt.AddPolicy("EmployerOrAdmin", policy => policy.RequireRole("Admin","Employer"));
+        opt.AddPolicy("IsActive", policy => policy.RequireRole("IsActive"));
     });
 
 builder.Services.AddSwaggerGen(c =>
@@ -108,6 +109,8 @@ builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IJwtService, JwtService>();
 builder.Services.AddScoped<IAttachService, AttachService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IApplicationService, ApplicationService>();
 builder.Services.AddScoped<GlobalExceptionHandlerMiddleware>();
 
 

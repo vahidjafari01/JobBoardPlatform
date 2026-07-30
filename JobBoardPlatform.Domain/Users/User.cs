@@ -19,12 +19,14 @@ namespace JobBoardPlatform.Domain.Users
         {
             
         }
-        public User(Guid? resumeId)
+        public User(Guid? resumeId, string lastName, string firstName)
         {
             CreatedAt = DateTime.UtcNow;
             ModifiedAt = DateTime.UtcNow;
             IsDeleted = false;
             ResumeId = resumeId;
+            LastName = lastName;
+            FirstName = firstName;
         }
         [Required]
         [MinLength(2)]
@@ -37,6 +39,7 @@ namespace JobBoardPlatform.Domain.Users
         public DateTime CreatedAt { get ; set ; } = DateTime.UtcNow;
         public DateTime ModifiedAt { get ; set ; }
         public bool IsDeleted { get; set; } = false;
+        public bool IsActive { get; set; } = true;
         public Guid? ResumeId{ get; set; }
 
         public Attach? ResumeFile{ get; set; }

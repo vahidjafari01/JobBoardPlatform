@@ -1,6 +1,9 @@
-﻿using JobBoardPlatform.Domain.Abstractions;
+﻿using Dapper;
+using JobBoardPlatform.Domain.Abstractions;
 using JobBoardPlatform.Domain.Users;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +16,28 @@ namespace JobBoardPlatform.Infrustructure.Repositories
     public class UserRepository : IUserREpository
     {
         public AppDbContext _context { get; set; }
-        public UserRepository(AppDbContext context)
+        private readonly IConfiguration _configuration;
+
+        public UserRepository(AppDbContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
+
+        public async Task<List<UserDto>> GetJobSeekers(int take,int skip)
+        {
+            using var sqlconnection = new SqlConnection(_configuration["ConnectionStrings:Sql"]);
+            var query = @"select u.Id As UserId,u.UserName,u.Email from AspNetUsers as u join AspNetUserRoles as r on u.Id=r.UserId 
+                        where r.RoleId ='3E9F489C-E97F-40DC-85C3-76CE5378303D'  order by u.CreatedAt
+                        offset @Skip rows fetch next @Take rows only;";
+            var result = await sqlconnection.QueryAsync<UserDto>(query, new {Skip=skip,Take = take });
+            return result.ToList();
+        }
+
+
+
+
+
         public async Task AddAsync(User entity)
         {
            await _context.Users.AddAsync(entity);
@@ -76,6 +97,20 @@ namespace JobBoardPlatform.Infrustructure.Repositories
         {
             _context.Users.Update(entity);
             return Task.CompletedTask;
+        }
+
+        public async Task<int> GetJobSeekerCount()
+        {
+            var query = @"select COUNT(*) from AspNetUsers as u join AspNetUserRoles as r on u.Id = r.UserId where r.RoleId = '3E9F489C-E97F-40DC-85C3-76CE5378303D';";
+
+            using var connection = new SqlConnection(_configuration["ConnectionStrings:Sql"]);
+            return await connection.ExecuteScalarAsync<int>(query);
+        }
+        public async Task<int> GetEmployerCount()
+        {
+            var query = @"select COUNT(*) from AspNetUsers as u join AspNetUserRoles as r on u.Id = r.UserId where r.RoleId = 'E5E54FE9-0F12-4B07-9243-3471EBE491BC';";
+            using var connection = new SqlConnection(_configuration["ConnectionStrings:Sql"]);
+            return await connection.ExecuteScalarAsync<int>(query);
         }
     }
 }
