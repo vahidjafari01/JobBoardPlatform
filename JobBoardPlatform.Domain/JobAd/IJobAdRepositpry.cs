@@ -23,5 +23,6 @@ namespace JobBoardPlatform.Domain.entities
         Task<JobAd?> GetJoinedJobAd(Guid JobAdId);
         Task<int> ActiveJobAdCount();
         Task<int> DeactiveJobAdCount();
+        Task<JobAd?> GetJobAdWithCompanyAsync(Guid jobAdid);
     }
 }

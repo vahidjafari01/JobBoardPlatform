@@ -1,4 +1,5 @@
 ﻿using JobBoardPlatfomr.Domain.Abstractions;
+using JobBoardPlatfomr.Services.InputDtos;
 using JobBoardPlatfomr.Services.OutPutDtos;
 using JobBoardPlatform.Domain.Abstractions;
 using JobBoardPlatform.Domain.Users;
@@ -14,8 +15,10 @@ namespace JobBoardPlatfomr.Services.IServices
     {
         Task<string> SetApprovedCompanyAsync(Guid companyId);
         Task<string> SetNotApprovedCompanyAsync(Guid companyId);
-        Task<List<EmployerDto>> GetEmployerAsync();
+        Task<List<EmployerDto>> GetEmployerAsync(Paging? paging);
+        Task<CompanyDto> GetMyCompanyDetailAsync(GetCompanyDetailCommand command);
         Task<List<UserDto>> GetJobSeekers(Paging? paging);
+        Task<UserProfileDto> GetJobseekerDetailAsync(Guid userId, Guid requesterId);
         Task<string> ActivateUser(Guid userId);
         Task<string> DeactivateUser(Guid userId);
         Task<List<JobAdDto>> GetAllJobAds(Paging? paging);

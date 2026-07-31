@@ -20,11 +20,13 @@ namespace JobBoardPlatfomr.Services.Services
     {
         private readonly IUnitOfWork _unitofWork;
         private readonly IAttachService _attachService;
+        private readonly IEmailSender _emailSender;
 
-        public ApplicationService(IUnitOfWork unitofWork, IAttachService attachService)
+        public ApplicationService(IUnitOfWork unitofWork, IAttachService attachService, IEmailSender emailSender)
         {
             _unitofWork = unitofWork;
             _attachService = attachService;
+            _emailSender = emailSender;
         }
         public async Task<List<ApplicationDto>> GetAppsByJObAdId(ApplicationJobAdCommand command)
         {
@@ -142,6 +144,23 @@ namespace JobBoardPlatfomr.Services.Services
             app.ModifiedAt = DateTime.UtcNow;
 
             await _unitofWork.ApplicationRepo.SaveChangesAsync();
+            string message = "";
+            switch (newstatus)
+            {
+                case ApplicationStatus.Accepted:
+                    message = $"your application was accepted for position {jobad.Title} in {company.Name} company ";
+                    break;
+                case ApplicationStatus.Rejected:
+                    message = $"your application was rejected for position {jobad.Title} in {company.Name} company ";
+                    break;
+                case ApplicationStatus.Interview:
+                    message = $"you was invited for position {jobad.Title} in {company.Name} company ";
+                    break;
+                case ApplicationStatus.InReview:
+                    message = $"your application is reviewing for position {jobad.Title} in {company.Name} company ";
+                    break;
+            }
+            await _emailSender.SendAsync(app.UserId,"Change Application status",message);
             return "succesfully Changed";
         }
 
@@ -173,7 +192,7 @@ namespace JobBoardPlatfomr.Services.Services
                     throw new PermisionException("This user does not belong to you.", "UserApplication-403");
                 }
             }
-            var jobad = await _unitofWork.JobAdsRepo.GetByIdAsync(cmd.jobAdID);
+            var jobad = await _unitofWork.JobAdsRepo.GetJobAdWithCompanyAsync(cmd.jobAdID);
             if (jobad == null)
             {
                 throw new NotFoundException("JobAd not found.", "JobAd-404");
@@ -196,6 +215,7 @@ namespace JobBoardPlatfomr.Services.Services
 
             await _unitofWork.ApplicationRepo.AddAsync(app);
             await _unitofWork.SaveChangesAsync();
+            await _emailSender.SendAsync(jobad.Company.UserId,"New Application",$"you Have a New Application for Position {jobad.Title}");
             return "succesfully Created";
         }
 

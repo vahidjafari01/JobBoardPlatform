@@ -181,3 +181,6 @@ C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatform.Presentation\obj\
 C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatform.Presentation\obj\Debug\net9.0\JobBoardPlatform.Presentation.genruntimeconfig.cache
 C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatform.Presentation\obj\Debug\net9.0\ref\JobBoardPlatform.Presentation.dll
 C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatform.Presentation\bin\Debug\net9.0\Dapper.dll
+C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatform.Presentation\bin\Debug\net9.0\BouncyCastle.Cryptography.dll
+C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatform.Presentation\bin\Debug\net9.0\MailKit.dll
+C:\Users\Asus\Desktop\c#test\JobBoardPlatform\JobBoardPlatform.Presentation\bin\Debug\net9.0\MimeKit.dll

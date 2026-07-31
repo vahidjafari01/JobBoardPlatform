@@ -13,7 +13,7 @@ namespace JobBoardPlatfomr.Services.OutPutDtos
 {
     public record JobAdDto
     {
-        public JobAdDto(string title, string description, string? location, TimeSpan startWorkTime, TimeSpan endWorkTIme, decimal? salaryMin, decimal? salaryMax, bool isFeatured, string status, string employementType, Guid companyId, List<string>? skils)
+        public JobAdDto(string title, string description, string? location, TimeSpan startWorkTime, TimeSpan endWorkTIme, decimal? salaryMin, decimal? salaryMax, bool isFeatured, string status, string employementType, Guid companyId, List<string>? skils, Guid jobAdId)
         {
             Title = title;
             Description = description;
@@ -27,6 +27,7 @@ namespace JobBoardPlatfomr.Services.OutPutDtos
             EmployementType = employementType;
             CompanyId = companyId;
             Skils = skils;
+            JobAdId = jobAdId;
         }
         public JobAdDto()
         {
@@ -47,6 +48,7 @@ namespace JobBoardPlatfomr.Services.OutPutDtos
         public string Status { get; set; }
         public string EmployementType { get; set; }
         public Guid CompanyId{ get; set; }
+        public Guid JobAdId{ get; set; }
         public List<string>? Skils { get; set; }
     }
 }

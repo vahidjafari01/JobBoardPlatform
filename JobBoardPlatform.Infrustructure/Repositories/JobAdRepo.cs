@@ -104,6 +104,9 @@ namespace JobBoardPlatform.Infrustructure.Repositories
         {
             return await _context.JobAds.CountAsync(j => j.Status != JobAdStatus.Published);
         }
-
+        public async Task<JobAd?> GetJobAdWithCompanyAsync(Guid jobAdid)
+        {
+            return await _context.JobAds.Include(j => j.Company).FirstOrDefaultAsync(j => j.Id == jobAdid);
+        }
     }
 }

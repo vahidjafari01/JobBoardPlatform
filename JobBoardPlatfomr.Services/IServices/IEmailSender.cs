@@ -8,6 +8,6 @@ namespace JobBoardPlatfomr.Services.IServices
 {
     public interface IEmailSender
     {
-        public Task SendAsync(string to, string subject, string body, bool isHtml, CancellationToken cancellationToken);
+        Task SendAsync(Guid userId, string subject, string body);
     }
 }

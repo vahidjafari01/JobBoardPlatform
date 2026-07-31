@@ -1,7 +1,6 @@
 ﻿using JobBoardPlatform.Domain.Abstractions;
 using JobBoardPlatform.Domain.Applications;
 using JobBoardPlatform.Domain.Cities;
-using JobBoardPlatform.Domain.Companies;
 using JobBoardPlatform.Domain.entities;
 using JobBoardPlatform.Domain.JobCategories;
 using JobBoardPlatform.Domain.Notifications;
@@ -18,6 +17,7 @@ using System.Threading.Tasks;
 
 namespace JobBoardPlatform.Infrustructure
 {
+    using JobBoardPlatform.Domain.Companies;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore.Storage;
     using Microsoft.Extensions.Configuration;

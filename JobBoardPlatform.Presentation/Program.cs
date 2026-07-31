@@ -1,4 +1,5 @@
 ﻿using JobBoardPlatfomr.Services.IServices;
+using JobBoardPlatfomr.Services.OutPutDtos;
 using JobBoardPlatfomr.Services.Services;
 using JobBoardPlatform.Domain.Abstractions;
 using JobBoardPlatform.Domain.Users;
@@ -66,7 +67,7 @@ builder.Services.AddAuthorization
     (opt =>
     {
         opt.AddPolicy("EmployerOrAdmin", policy => policy.RequireRole("Admin","Employer"));
-        opt.AddPolicy("IsActive", policy => policy.RequireRole("IsActive"));
+        opt.AddPolicy("IsActive", policy => policy.RequireClaim("IsActive"));
     });
 
 builder.Services.AddSwaggerGen(c =>
@@ -110,6 +111,10 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IJwtService, JwtService>();
 builder.Services.AddScoped<IAttachService, AttachService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IAdminService,AdminService>();
+builder.Services.AddScoped<IEmailSender,EmailSender>();
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection(EmailSettings.SectionName));
+
 builder.Services.AddScoped<IApplicationService, ApplicationService>();
 builder.Services.AddScoped<GlobalExceptionHandlerMiddleware>();
 

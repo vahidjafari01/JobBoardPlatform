@@ -17,17 +17,19 @@ using System.Threading.Tasks;
 
 namespace JobBoardPlatfomr.Services.Services
 {
-    public class AdminService
+    public class AdminService:IAdminService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ICompanyService _companyService;
         private readonly IUserService _userService;
+        private readonly IEmailSender _emailSender;
 
-        public AdminService(IUnitOfWork unitOfWork, ICompanyService companyService, IUserService userservice)
+        public AdminService(IUnitOfWork unitOfWork, ICompanyService companyService, IUserService userservice, IEmailSender emailSender)
         {
             _unitOfWork = unitOfWork;
             _companyService = companyService;
             _userService = userservice;
+            _emailSender = emailSender;
         }
         public async Task<List<EmployerDto>> GetEmployerAsync(Paging? paging)
         {
@@ -53,6 +55,7 @@ namespace JobBoardPlatfomr.Services.Services
             {
                 company.IsApproved = true;
                 await _unitOfWork.CompanyRepo.SaveChangesAsync();
+                await _emailSender.SendAsync(company.UserId, "Company Status", "your company succesfully was approved");
                 return "sucessfully approved";
             }
 
@@ -72,6 +75,7 @@ namespace JobBoardPlatfomr.Services.Services
             {
                 company.IsApproved = false;
                 await _unitOfWork.CompanyRepo.SaveChangesAsync();
+                await _emailSender.SendAsync(company.UserId, "Company Status", "your company is no longer approved");
                 return "sucessfully Changed";
             }
         }
@@ -151,7 +155,7 @@ namespace JobBoardPlatfomr.Services.Services
                 page = paging;
             }
             var result =await _unitOfWork.JobAdsRepo.Pagination(page);
-            return result.Select(j => new JobAdDto(j.Title,j.Description,j.Location,j.StartWorkTime,j.EndWorkTIme,j.SalaryMin,j.SalaryMax,j.IsFeatured,j.Status.ToString(),j.EmployementType.ToString(),j.CompanyId,j.Skils)).ToList();
+            return result.Select(j => new JobAdDto(j.Title,j.Description,j.Location,j.StartWorkTime,j.EndWorkTIme,j.SalaryMin,j.SalaryMax,j.IsFeatured,j.Status.ToString(),j.EmployementType.ToString(),j.CompanyId,j.Skils,j.Id)).ToList();
 
         }
         public async Task<string> ActivateJobAd(Guid jobAdId)
@@ -282,8 +286,6 @@ namespace JobBoardPlatfomr.Services.Services
         }
        
 
-
-
-
+       
     }
 }

@@ -204,6 +204,7 @@ namespace JobBoardPlatfomr.Services.Services
                 EmployementType = j.EmployementType.ToString(),
                 CompanyId = j.CompanyId,
                 Skils = j.Skils,
+                JobAdId = j.Id
             }).ToList();
         }
 
