@@ -34,6 +34,7 @@ namespace JobBoardPlatfomr.Services.OutPutDtos
         public string LastName { get; set; }
         public DateTime SubmitedAt { get; set; }
         public string status { get; set; }
+        public Guid? ResumeId { get; set; }
 
 
     }

@@ -90,7 +90,7 @@ namespace JobBoardPlatfomr.Services.Services
             {
                 page = paging;
             }
-            return await _unitOfWork.UserRepo.GetJobSeekers(page.PageNumber,page.Skip);
+            return await _unitOfWork.UserRepo.GetJobSeekers(page.PageSize, page.Skip);
         }
         public async Task<UserProfileDto> GetJobseekerDetailAsync(Guid userId,Guid requesterId)
         {

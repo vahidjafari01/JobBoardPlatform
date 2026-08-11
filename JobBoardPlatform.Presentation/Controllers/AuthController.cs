@@ -41,7 +41,7 @@ namespace JobBoardPlatform.Presentation.Controllers
         }
 
         [HttpPost("Refresh")]
-        public async Task<ActionResult<BaseResponseDto>> Login([FromBody] RefreshDto refreshDto)
+        public async Task<ActionResult<BaseResponseDto>> Refresh([FromBody] RefreshDto refreshDto)
         {
             var result = await _authService.Refresh(refreshDto.token, refreshDto.UserId);
             return Ok(new BaseResponseDto(result));

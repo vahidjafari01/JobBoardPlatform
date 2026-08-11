@@ -8,7 +8,7 @@ namespace JobBoardPlatfomr.Services.OutPutDtos
 {
     public record AppDetailForJobSeeker
     {
-        public AppDetailForJobSeeker(Guid jobAdId, Guid appId, string status, DateTime? reviewedAt, DateTime? modifiedAt, string? noteWritenByUser)
+        public AppDetailForJobSeeker(Guid jobAdId, Guid appId, string status, DateTime? reviewedAt, DateTime? modifiedAt, string? noteWritenByUser, Guid? resumeId)
         {
             JobAdId = jobAdId;
             AppId = appId;
@@ -16,6 +16,7 @@ namespace JobBoardPlatfomr.Services.OutPutDtos
             ReviewedAt = reviewedAt;
             ModifiedAt = modifiedAt;
             NoteWritenByUser = noteWritenByUser;
+            ResumeId = resumeId;
         }
 
         public Guid JobAdId { get; set; }
@@ -24,5 +25,6 @@ namespace JobBoardPlatfomr.Services.OutPutDtos
         public DateTime? ReviewedAt { get; set; }
         public DateTime? ModifiedAt{ get; set; }
         public string? NoteWritenByUser { get; set; }
+        public Guid? ResumeId { get; set; }
     }
 }

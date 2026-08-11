@@ -24,5 +24,6 @@ namespace JobBoardPlatform.Domain.entities
         Task<int> ActiveJobAdCount();
         Task<int> DeactiveJobAdCount();
         Task<JobAd?> GetJobAdWithCompanyAsync(Guid jobAdid);
+        Task UpdateExpiredJobs();
     }
 }

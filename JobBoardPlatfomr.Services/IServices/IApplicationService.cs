@@ -18,7 +18,8 @@ namespace JobBoardPlatfomr.Services.IServices
 
         Task<AppDetailForJobSeeker> GetAppDetailForJobSeekerAsync(Guid RequesterId, Guid appid);
         Task<List<AppDtoForCustomer>> GetAppsForJobSeekerAsync(Guid UserId, Guid RequesterId);
-        
+        Task<AttachOutputDto> GetResumeAsync(Guid requesterId, Guid appId);
+
 
     }
 }

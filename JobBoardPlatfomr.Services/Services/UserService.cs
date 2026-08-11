@@ -36,7 +36,7 @@ namespace JobBoardPlatfomr.Services.Services
                     throw new PermisionException("this Profile Does not belong to you", "jobAd-403");
                 }
             }
-            var user =await _unitOfWork.userManager.FindByIdAsync(requesterId.ToString());
+            var user = await _unitOfWork.userManager.FindByIdAsync(userId.ToString());
             if (user == null || user.IsDeleted == true)
             {
                 throw new NotFoundException("User Not found","user-404");
@@ -46,7 +46,7 @@ namespace JobBoardPlatfomr.Services.Services
         private async Task<bool> IsAdmin(Guid requesterid)
         {
             var user = await _unitOfWork.userManager.FindByIdAsync(requesterid.ToString());
-            return await _unitOfWork.userManager.IsInRoleAsync(user, "Admin");
+            return user != null && await _unitOfWork.userManager.IsInRoleAsync(user, "Admin");
         }
         public async Task<string> UpdateProfile(UpdateProfileCommand command)
         {
@@ -120,24 +120,24 @@ namespace JobBoardPlatfomr.Services.Services
 
                 return "Profile updated successfully.";
             }
-            catch (BadRequestException ex)
+            catch (BadRequestException)
             {
                 await _unitOfWork.RollbackTransactionAsync();
-                throw ex;
+                throw;
             }
-            catch (NotFoundException ex)
+            catch (NotFoundException)
             {
                 await _unitOfWork.RollbackTransactionAsync();
-                throw ex;
+                throw;
             }
-            catch (PermisionException ex)
+            catch (PermisionException)
             {
                 await _unitOfWork.RollbackTransactionAsync();
-                throw ex;
+                throw;
             }
-            catch (Exception ex) {
+            catch (Exception) {
             await _unitOfWork.RollbackTransactionAsync();
-                throw ex;
+                throw;
             }
 
         }
@@ -223,25 +223,25 @@ namespace JobBoardPlatfomr.Services.Services
 
                 return "Resume deleted successfully.";
             }
-            catch (BadRequestException ex)
+            catch (BadRequestException)
             {
                 await _unitOfWork.RollbackTransactionAsync();
-                throw ex;
+                throw;
             }
-            catch (NotFoundException ex)
+            catch (NotFoundException)
             {
                 await _unitOfWork.RollbackTransactionAsync();
-                throw ex;
+                throw;
             }
-            catch (PermisionException ex)
+            catch (PermisionException)
             {
                 await _unitOfWork.RollbackTransactionAsync();
-                throw ex;
+                throw;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 await _unitOfWork.RollbackTransactionAsync();
-                throw ex;
+                throw;
             }
 
         }
@@ -275,25 +275,25 @@ namespace JobBoardPlatfomr.Services.Services
                 await _unitOfWork.CommitTransactionAsync();
                 return AttachId;
             }
-            catch (BadRequestException ex)
+            catch (BadRequestException)
             {
                 await _unitOfWork.RollbackTransactionAsync();
-                throw ex;
+                throw;
             }
-            catch (NotFoundException ex)
+            catch (NotFoundException)
             {
                 await _unitOfWork.RollbackTransactionAsync();
-                throw ex;
+                throw;
             }
-            catch (PermisionException ex)
+            catch (PermisionException)
             {
                 await _unitOfWork.RollbackTransactionAsync();
-                throw ex;
+                throw;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 await _unitOfWork.RollbackTransactionAsync();
-                throw ex;
+                throw;
             }
         }
         public async Task<AttachOutputDto> DownloadMyResumeAsync(Guid requesterId,Guid userId)

@@ -6,12 +6,14 @@ using JobBoardPlatform.Domain.Abstractions;
 using JobBoardPlatform.Domain.entities;
 using JobBoardPlatform.Domain.enums;
 using JobBoardPlatform.Domain.Payments;
+using Microsoft.Extensions.Caching.Distributed;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace JobBoardPlatfomr.Services.Services
@@ -20,10 +22,12 @@ namespace JobBoardPlatfomr.Services.Services
     {
 
         private readonly IUnitOfWork _unitofwork;
+        private readonly IRedisService _redis;
 
-        public JobAdService(IUnitOfWork unitofwork)
+        public JobAdService(IUnitOfWork unitofwork, IRedisService redis)
         {
             _unitofwork = unitofwork;
+            _redis = redis;
         }
 
         public async Task<Guid> AddJobAd(JobAdCreateCommand command)
@@ -120,6 +124,10 @@ namespace JobBoardPlatfomr.Services.Services
             }
 
             var Jobad = await _unitofwork.JobAdsRepo.GetByIdAsync(command.JobadId, true);
+            if (Jobad == null)
+            {
+                throw new NotFoundException("jobad not found", "jobad-404");
+            }
             Jobad.Title = command.Title;
             Jobad.Description = command.Description;
             Jobad.Location = command.Location;
@@ -136,7 +144,7 @@ namespace JobBoardPlatfomr.Services.Services
         }
         public async Task<List<JobAdDto>> GetJobAds(Paging paging)
         {
-            var jobads = await _unitofwork.JobAdsRepo.GetJObAdsPaging(paging.PageNumber, paging.Skip, j => j.Status == JobAdStatus.Published);
+            var jobads = await _unitofwork.JobAdsRepo.GetJObAdsPaging(paging.PageSize, paging.Skip, j => j.Status == JobAdStatus.Published);
             return jobads.Select(j => new JobAdDto
             {
                 Title = j.Title,
@@ -172,6 +180,10 @@ namespace JobBoardPlatfomr.Services.Services
                 }
             }
             var jobad = await _unitofwork.JobAdsRepo.GetByIdAsync(command.JObAdID, true);
+            if (jobad == null)
+            {
+                throw new NotFoundException("jobad not found", "jobad-404");
+            }
             jobad.Status = JobAdStatus.Closed;
             await _unitofwork.JobAdsRepo.SaveChangesAsync();
         }
@@ -297,25 +309,26 @@ namespace JobBoardPlatfomr.Services.Services
             {
                 throw new NotFoundException("category not found", "category-404");
             }
-            var jobAdDetail = new JobAdDetail(jobad.Title, jobad.Description, jobad.Location, jobad.StartWorkTime, jobad.EndWorkTIme, jobad.SalaryMin, jobad.SalaryMax, jobad.IsFeatured, jobad.Status.ToString(), jobad.EmployementType.ToString(), jobad.Skils, jobad.FeaturePriority, jobad.FeaturedUntil, jobad.Applications.Count(), jobad.Payments, category.Name);
+            var jobAdDetail = new JobAdDetail(jobad.Title, jobad.Description, jobad.Location, jobad.StartWorkTime, jobad.EndWorkTIme, jobad.SalaryMin, jobad.SalaryMax, jobad.IsFeatured, jobad.Status.ToString(), jobad.EmployementType.ToString(), jobad.Skils, jobad.FeaturePriority, jobad.FeaturedUntil, jobad.Applications?.Count() ?? 0, jobad.Payments, category.Name);
             return jobAdDetail;
 
         }
         private async Task<bool> IsAdmin(Guid requesterid)
         {
             var user = await _unitofwork.userManager.FindByIdAsync(requesterid.ToString());
-            return await _unitofwork.userManager.IsInRoleAsync(user, "Admin");
+            return user != null && await _unitofwork.userManager.IsInRoleAsync(user, "Admin");
         }
 
 
         public async Task<List<JobAdViewModel>> GetJobAdsForCustomersAsync(GetJObAdFilterCommand cmd, Paging? paging)
         {
-            EmploymentType? finalEmploymentType = null;
-            if (paging == null)
+
+           if (paging == null)
             {
                 paging = new Paging();
             }
 
+            EmploymentType? finalEmploymentType = null;
             if (cmd.EmployementType != null)
             {
                 if (!Enum.TryParse<EmploymentType>(cmd.EmployementType, true, out var resultstatus))
@@ -323,6 +336,28 @@ namespace JobBoardPlatfomr.Services.Services
                     throw new BadRequestException("the employment type is not valid");
                 }
                 finalEmploymentType = resultstatus;
+            }
+
+            bool isGeneralFirstPage = paging.Skip == 0 &&
+                                     cmd.CompanyId == null &&
+                                     cmd.CityId == null &&
+                                     cmd.ProvinceId == null &&
+                                     cmd.CategoryId == null &&
+                                     cmd.SalaryMax == null &&
+                                     cmd.SalaryMin == null &&
+                                     finalEmploymentType == null &&
+                                     (cmd.Skils == null || !cmd.Skils.Any()) &&
+                                     string.IsNullOrWhiteSpace(cmd.Title);
+
+            const string cacheKey = "jobads:general:page1";
+
+            if (isGeneralFirstPage)
+            {
+                var cachedData = await _redis.GetAsync<List<JobAdViewModel>>(cacheKey);
+                if (cachedData is not null)
+                {
+                    return cachedData;
+                }
             }
 
             var command = new GetJobAdCommand()
@@ -337,16 +372,25 @@ namespace JobBoardPlatfomr.Services.Services
                 Skils = cmd.Skils,
                 Title = cmd.Title,
             };
+
             var jobads = await _unitofwork.JobAdsRepo.GetJobAdsBYFilter(command, paging.PageSize, paging.Skip);
-            return jobads.Select(j => new JobAdViewModel {
+
+            var resultList = jobads.Select(j => new JobAdViewModel
+            {
                 Title = j.Title,
                 JobAdId = j.Id,
                 SalaryMin = j.SalaryMin,
                 SalaryMax = j.SalaryMax,
                 IsFeatured = j.IsFeatured,
                 EmployementType = j.EmployementType.ToString(),
-                LogoId = j.Company.LogoId,
+                LogoId = j.Company?.LogoId,
             }).ToList();
+
+            if (isGeneralFirstPage && resultList.Any())
+            {
+                await _redis.SetAsync<List<JobAdViewModel>>(cacheKey,resultList,TimeSpan.FromMinutes(10));
+            }
+            return resultList;
 
         }
         public async Task<JobAdDetailForCustomer> GetJobAdDetailForCustomerAsync(Guid JobAdId)
@@ -427,6 +471,10 @@ namespace JobBoardPlatfomr.Services.Services
             await _unitofwork.SaveChangesAsync();
             return "sucessfully Converted to pro";
 
+        }
+        public async Task UpdateExpiredJobs()
+        {
+            await _unitofwork.JobAdsRepo.UpdateExpiredJobs();
         }
 
 

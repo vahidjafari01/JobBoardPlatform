@@ -1,0 +1,53 @@
+@model JobBoardPlatfomr.Services.OutPutDtos.UserProfileDto
+@{
+    ViewData["Title"] = "Job Seeker Detail";
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-7">
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+                <div class="d-flex align-items-center gap-3 mb-4">
+                    <div class="avatar" style="width:64px; height:64px; font-size:1.5rem;">
+                        @(Model.FirstName?.FirstOrDefault().ToString() ?? "?")@(Model.LastName?.FirstOrDefault().ToString())
+                    </div>
+                    <div>
+                        <h4 class="fw-bold mb-0">@Model.FirstName @Model.LastName</h4>
+                        <span class="text-muted">@Model.Username</span>
+                    </div>
+                </div>
+                <dl class="row mb-0">
+                    <dt class="col-sm-4 text-muted">Email</dt>
+                    <dd class="col-sm-8">@Model.Email</dd>
+                    <dt class="col-sm-4 text-muted">Registered</dt>
+                    <dd class="col-sm-8">@Model.CreatedAt.ToString("yyyy-MM-dd")</dd>
+                    <dt class="col-sm-4 text-muted">Status</dt>
+                    <dd class="col-sm-8">
+                        @if (Model.IsActive)
+                        {
+                            <span class="badge text-bg-success">Active</span>
+                        }
+                        else
+                        {
+                            <span class="badge text-bg-secondary">Inactive</span>
+                        }
+                    </dd>
+                    <dt class="col-sm-4 text-muted">Resume</dt>
+                    <dd class="col-sm-8">
+                        @if (Model.ResumeId.HasValue)
+                        {
+                            <span class="badge text-bg-info"><i class="bi bi-file-earmark-text me-1"></i>Uploaded</span>
+                        }
+                        else
+                        {
+                            <span class="badge text-bg-light text-muted">None</span>
+                        }
+                    </dd>
+                </dl>
+                <div class="mt-4">
+                    <a asp-controller="Admin" asp-action="JobSeekers" class="btn btn-secondary rounded-pill"><i class="bi bi-arrow-left me-2"></i>Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

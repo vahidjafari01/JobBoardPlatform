@@ -1,0 +1,102 @@
+@model JobAdFormViewModel
+@{
+    ViewData["Title"] = "Edit Job Ad";
+    var cities = (List<SelectListItem>)ViewData["Cities"]!;
+    var categories = (List<SelectListItem>)ViewData["Categories"]!;
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-9">
+        <div class="card shadow-sm">
+            <div class="card-body p-4 p-lg-5">
+                <div class="text-center mb-4">
+                    <div class="mx-auto mb-3" style="width:70px; height:70px; border-radius:1.2rem; background:var(--brand-light); display:grid; place-items:center;">
+                        <i class="bi bi-pencil-square" style="font-size:1.8rem; color:var(--brand);"></i>
+                    </div>
+                    <h4 class="fw-bold mb-1">Edit Job Ad</h4>
+                    <p class="text-muted mb-0">Update the details of your job posting.</p>
+                </div>
+                <form method="post" asp-controller="Employer" asp-action="EditJob">
+                    <input type="hidden" asp-for="JobAdId" />
+                    <div asp-validation-summary="ModelOnly" class="text-danger small"></div>
+
+                    <h6 class="fw-bold text-primary mb-3"><i class="bi bi-card-text me-2"></i>Job Details</h6>
+                    <div class="mb-3">
+                        <label asp-for="Title" class="form-label"></label>
+                        <input asp-for="Title" class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Description" class="form-label"></label>
+                        <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+                    </div>
+
+                    <h6 class="fw-bold text-primary mb-3 mt-4"><i class="bi bi-geo-alt me-2"></i>Location & Category</h6>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label asp-for="CategoryId" class="form-label"></label>
+                            <select asp-for="CategoryId" class="form-select" asp-items="categories"></select>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label asp-for="CityId" class="form-label"></label>
+                            <select asp-for="CityId" class="form-select" asp-items="cities"></select>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label asp-for="Location" class="form-label"></label>
+                            <input asp-for="Location" class="form-control" />
+                        </div>
+                    </div>
+
+                    <h6 class="fw-bold text-primary mb-3 mt-4"><i class="bi bi-clipboard-data me-2"></i>Work Details</h6>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="EmployementType" class="form-label"></label>
+                            <select asp-for="EmployementType" class="form-select">
+                                <option value="FullTime">Full Time</option>
+                                <option value="PartTime">Part Time</option>
+                                <option value="Remote">Remote</option>
+                                <option value="Contract">Contract</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="JobAdStatus" class="form-label"></label>
+                            <select asp-for="JobAdStatus" class="form-select">
+                                <option value="Active">Active</option>
+                                <option value="Pending">Pending</option>
+                                <option value="Archived">Archived</option>
+                                <option value="Closed">Closed</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <label asp-for="StartWorkTime" class="form-label">Work Start</label>
+                            <input asp-for="StartWorkTime" type="time" class="form-control" />
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label asp-for="EndWorkTime" class="form-label">Work End</label>
+                            <input asp-for="EndWorkTime" type="time" class="form-control" />
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label asp-for="SalaryMin" class="form-label">Min Salary</label>
+                            <input asp-for="SalaryMin" type="number" class="form-control" placeholder="Min salary" />
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label asp-for="SalaryMax" class="form-label">Max Salary</label>
+                            <input asp-for="SalaryMax" type="number" class="form-control" placeholder="Max salary" />
+                        </div>
+                    </div>
+
+                    <h6 class="fw-bold text-primary mb-3 mt-4"><i class="bi bi-tools me-2"></i>Skills</h6>
+                    <div class="mb-4">
+                        <label asp-for="Skills" class="form-label">Required Skills <span class="text-muted fw-normal">(comma separated)</span></label>
+                        <input asp-for="Skills" class="form-control" placeholder="C#, ASP.NET, SQL" />
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100 rounded-pill py-2">
+                        <i class="bi bi-check-lg me-2"></i>Save Changes
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -15,44 +15,43 @@ namespace JobBoardPlatform.Presentation.Middlewares
             }
             catch (Exception e)
             {
-                HandleExceptionAsync(context, e);
+                await HandleExceptionAsync(context, e);
             }
         }
 
-        private void HandleExceptionAsync(HttpContext context, Exception exception)
+        private static Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
+            context.Response.ContentType = "application/json";
+
             switch (exception)
             {
                 case NotFoundException ex:
-                    context.Response.StatusCode = 404;
-                    context.Response.WriteAsync(GenerateResponseBody(ex.Code, ex.Message));
-                    break;
+                    context.Response.StatusCode = StatusCodes.Status404NotFound;
+                    return context.Response.WriteAsync(GenerateResponseBody(ex.Code, ex.Message));
                 case PermisionException ex:
-                    context.Response.StatusCode = 403;
-                    context.Response.WriteAsync(GenerateResponseBody(ex.Code, ex.Message));
-                    break;
+                    context.Response.StatusCode = StatusCodes.Status403Forbidden;
+                    return context.Response.WriteAsync(GenerateResponseBody(ex.Code, ex.Message));
                 case BadRequestException ex:
-                    context.Response.StatusCode = 400;
-                    context.Response.WriteAsync(GenerateResponseBody(ex.Code, ex.Message));
-                    break;
+                    context.Response.StatusCode = StatusCodes.Status400BadRequest;
+                    return context.Response.WriteAsync(GenerateResponseBody(ex.Code, ex.Message));
+                case UnauthorizedAccessException ex:
+                    context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                    return context.Response.WriteAsync(GenerateResponseBody("Unauthorized-401", ex.Message));
                 case ArgumentNullException ex:
-                    context.Response.StatusCode = 400;
-                    context.Response.WriteAsync(GenerateResponseBody("ArgumentNull-400", ex.Message));
-                    break;
+                    context.Response.StatusCode = StatusCodes.Status400BadRequest;
+                    return context.Response.WriteAsync(GenerateResponseBody("ArgumentNull-400", ex.Message));
                 case ArgumentOutOfRangeException ex:
-                    context.Response.StatusCode = 400;
-                    context.Response.WriteAsync(GenerateResponseBody("ArgumentOutofRang-400", ex.Message));
-                    break;
+                    context.Response.StatusCode = StatusCodes.Status400BadRequest;
+                    return context.Response.WriteAsync(GenerateResponseBody("ArgumentOutofRang-400", ex.Message));
                 default:
-                    context.Response.StatusCode = 500;
-                    context.Response.WriteAsync(GenerateResponseBody(
+                    context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+                    return context.Response.WriteAsync(GenerateResponseBody(
                         "InternalServerError_500",
                         "Something went wrong. Please contact your administrator."));
-                    break;
             }
         }
 
-        private string GenerateResponseBody(string code, string message)
+        private static string GenerateResponseBody(string code, string message)
         {
             var response = new BaseResponseDto(message, code);
 

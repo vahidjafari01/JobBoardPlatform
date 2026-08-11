@@ -1,13 +1,17 @@
 {
   "version": 2,
-  "dgSpecHash": "eppMoG56360=",
+  "dgSpecHash": "XUn4/ivc2lY=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Asus\\Desktop\\c#test\\JobBoardPlatform\\JobBoardPlatform.Presentation\\JobBoardPlatform.Presentation.csproj",
+  "projectFilePath": "C:\\Users\\Asus\\Desktop\\JobBoardPlatform\\JobBoardPlatform.Presentation\\JobBoardPlatform.Presentation.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Asus\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\bouncycastle.cryptography\\2.6.2\\bouncycastle.cryptography.2.6.2.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\dapper\\2.1.79\\dapper.2.1.79.nupkg.sha512",
+    "C:\\Users\\Asus\\.nuget\\packages\\hangfire.aspnetcore\\1.8.24\\hangfire.aspnetcore.1.8.24.nupkg.sha512",
+    "C:\\Users\\Asus\\.nuget\\packages\\hangfire.core\\1.8.24\\hangfire.core.1.8.24.nupkg.sha512",
+    "C:\\Users\\Asus\\.nuget\\packages\\hangfire.netcore\\1.8.24\\hangfire.netcore.1.8.24.nupkg.sha512",
+    "C:\\Users\\Asus\\.nuget\\packages\\hangfire.sqlserver\\1.8.24\\hangfire.sqlserver.1.8.24.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\mailkit\\4.17.0\\mailkit.4.17.0.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\9.0.16\\microsoft.aspnetcore.authentication.jwtbearer.9.0.16.nupkg.sha512",
@@ -35,10 +39,13 @@
     "C:\\Users\\Asus\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\9.0.16\\microsoft.extensions.caching.abstractions.9.0.16.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\microsoft.extensions.caching.memory\\9.0.16\\microsoft.extensions.caching.memory.9.0.16.nupkg.sha512",
+    "C:\\Users\\Asus\\.nuget\\packages\\microsoft.extensions.caching.stackexchangeredis\\9.0.16\\microsoft.extensions.caching.stackexchangeredis.9.0.16.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\9.0.16\\microsoft.extensions.configuration.abstractions.9.0.16.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\9.0.16\\microsoft.extensions.dependencyinjection.9.0.16.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\9.0.16\\microsoft.extensions.dependencyinjection.abstractions.9.0.16.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\microsoft.extensions.dependencymodel\\9.0.16\\microsoft.extensions.dependencymodel.9.0.16.nupkg.sha512",
+    "C:\\Users\\Asus\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\3.0.0\\microsoft.extensions.fileproviders.abstractions.3.0.0.nupkg.sha512",
+    "C:\\Users\\Asus\\.nuget\\packages\\microsoft.extensions.hosting.abstractions\\3.0.0\\microsoft.extensions.hosting.abstractions.3.0.0.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\microsoft.extensions.identity.core\\9.0.16\\microsoft.extensions.identity.core.9.0.16.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\microsoft.extensions.identity.stores\\9.0.16\\microsoft.extensions.identity.stores.9.0.16.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\microsoft.extensions.logging\\9.0.16\\microsoft.extensions.logging.9.0.16.nupkg.sha512",
@@ -58,6 +65,9 @@
     "C:\\Users\\Asus\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\mimekit\\4.17.0\\mimekit.4.17.0.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\mono.texttemplating\\3.0.0\\mono.texttemplating.3.0.0.nupkg.sha512",
+    "C:\\Users\\Asus\\.nuget\\packages\\newtonsoft.json\\11.0.1\\newtonsoft.json.11.0.1.nupkg.sha512",
+    "C:\\Users\\Asus\\.nuget\\packages\\pipelines.sockets.unofficial\\2.2.8\\pipelines.sockets.unofficial.2.2.8.nupkg.sha512",
+    "C:\\Users\\Asus\\.nuget\\packages\\stackexchange.redis\\2.7.27\\stackexchange.redis.2.7.27.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\swashbuckle.aspnetcore\\6.6.2\\swashbuckle.aspnetcore.6.6.2.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.6.2\\swashbuckle.aspnetcore.swagger.6.6.2.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.6.2\\swashbuckle.aspnetcore.swaggergen.6.6.2.nupkg.sha512",
@@ -96,15 +106,5 @@
     "C:\\Users\\Asus\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1900",
-      "level": "Warning",
-      "message": "Error occurred while getting package vulnerability data: Unable to load the service index for source https://api.nuget.org/v3/index.json.",
-      "projectPath": "C:\\Users\\Asus\\Desktop\\c#test\\JobBoardPlatform\\JobBoardPlatform.Presentation\\JobBoardPlatform.Presentation.csproj",
-      "warningLevel": 1,
-      "filePath": "C:\\Users\\Asus\\Desktop\\c#test\\JobBoardPlatform\\JobBoardPlatform.Presentation\\JobBoardPlatform.Presentation.csproj",
-      "targetGraphs": []
-    }
-  ]
+  "logs": []
 }

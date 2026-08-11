@@ -61,7 +61,7 @@ namespace JobBoardPlatform.Presentation.Controllers
         [HttpPut("{userId:guid}/Resume")]
         [Authorize]
         [Authorize(policy: "IsActive")]
-        public async Task<ActionResult<BaseResponseDto>> UploadResume([FromRoute] Guid userId, [FromBody] IFormFile file)
+        public async Task<ActionResult<BaseResponseDto>> UploadResume([FromRoute] Guid userId, [FromForm] IFormFile file)
         {
             var user = User;
 

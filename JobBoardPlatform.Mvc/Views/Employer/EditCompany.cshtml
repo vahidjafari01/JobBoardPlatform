@@ -1,0 +1,64 @@
+@model CompanyFormViewModel
+@{
+    ViewData["Title"] = "Edit Company";
+    var cities = (List<SelectListItem>)ViewData["Cities"]!;
+    var companyId = (Guid)ViewData["CompanyId"]!;
+    var logoId = (Guid?)ViewData["LogoId"];
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-7">
+        <div class="card shadow-sm mb-4">
+            <div class="card-body p-4 p-lg-5">
+                <div class="text-center mb-4">
+                    @if (logoId.HasValue)
+                    {
+                        <img src="/api/Attach/@logoId" alt="logo" class="rounded-4 border shadow-sm mb-3" style="width:96px; height:96px; object-fit:cover;" />
+                    }
+                    else
+                    {
+                        <div class="mx-auto mb-3" style="width:70px; height:70px; border-radius:1.2rem; background:var(--brand-light); display:grid; place-items:center;">
+                            <i class="bi bi-buildings" style="font-size:1.8rem; color:var(--brand);"></i>
+                        </div>
+                    }
+                    <h4 class="fw-bold mb-1">My Company</h4>
+                </div>
+
+                <form method="post" asp-controller="Employer" asp-action="UploadLogo" enctype="multipart/form-data" class="d-flex gap-2 align-items-end mb-4">
+                    <div class="flex-grow-1">
+                        <label class="form-label">Company Logo</label>
+                        <input type="file" name="file" class="form-control" accept="image/*" />
+                    </div>
+                    <button type="submit" class="btn btn-outline-primary rounded-pill">Upload</button>
+                </form>
+
+                <form method="post" asp-controller="Employer" asp-action="UpdateCompany">
+                    <div asp-validation-summary="ModelOnly" class="text-danger small"></div>
+                    <div class="mb-3">
+                        <label asp-for="Name" class="form-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Description" class="form-label"></label>
+                        <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Website" class="form-label"></label>
+                            <input asp-for="Website" class="form-control" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="CityId" class="form-label"></label>
+                            <select asp-for="CityId" class="form-select" asp-items="cities"></select>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label asp-for="Location" class="form-label"></label>
+                        <input asp-for="Location" class="form-control" />
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 rounded-pill py-2">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

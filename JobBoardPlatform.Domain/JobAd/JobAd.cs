@@ -39,7 +39,7 @@ namespace JobBoardPlatform.Domain.entities
         private void Validate()
         {
             if(string.IsNullOrWhiteSpace(Title)) throw new ArgumentNullException("title can not be null");
-            if(string.IsNullOrWhiteSpace(Description)) throw new ArgumentNullException("title can not be null");
+            if(string.IsNullOrWhiteSpace(Description)) throw new ArgumentNullException("description can not be null");
             if (FeaturePriority < 1 || FeaturePriority > 3) throw new ArgumentOutOfRangeException("FeatuerPrirate must be in range of (1,3)");
         }
         public string Title { get; set; } = null!;

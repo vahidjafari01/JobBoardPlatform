@@ -28,6 +28,7 @@ namespace JobBoardPlatform.Infrustructure
     {
         private readonly AppDbContext _appDbContext;
         private IDbContextTransaction? _transaction;
+        private int _transactionDepth;
 
         public IUserREpository UserRepo { get; }
         public ICompanyRepository CompanyRepo { get; }
@@ -69,8 +70,12 @@ namespace JobBoardPlatform.Infrustructure
         public async Task BeginTransactionAsync()
         {
             if (_transaction != null)
+            {
+                _transactionDepth++;
                 return;
+            }
 
+            _transactionDepth = 1;
             _transaction = await _appDbContext.Database.BeginTransactionAsync();
         }
 
@@ -79,10 +84,15 @@ namespace JobBoardPlatform.Infrustructure
             if (_transaction == null)
                 return;
 
+            _transactionDepth--;
+            if (_transactionDepth > 0)
+                return;
+
             await _appDbContext.SaveChangesAsync();
             await _transaction.CommitAsync();
             await _transaction.DisposeAsync();
             _transaction = null;
+            _transactionDepth = 0;
         }
 
         public async Task RollbackTransactionAsync()
@@ -93,6 +103,7 @@ namespace JobBoardPlatform.Infrustructure
             await _transaction.RollbackAsync();
             await _transaction.DisposeAsync();
             _transaction = null;
+            _transactionDepth = 0;
         }
 
         public async Task SaveChangesAsync()

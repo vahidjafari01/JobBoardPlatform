@@ -19,13 +19,15 @@ namespace JobBoardPlatform.Presentation
 
             if (adminData is null) return;
 
+            var existingAdmin = await userManager.FindByNameAsync(adminData.Username)
+                                ?? await userManager.FindByEmailAsync(adminData.Email);
+            if (existingAdmin is not null) return;
 
-            if (adminData != null)
-            {
-                var adminUser = new User { UserName = adminData.Username,FirstName = adminData.FirstName,LastName = adminData.LastName,Email = adminData.Email};
-               var a = await userManager.CreateAsync(adminUser, adminData.Password);
-               var b = await userManager.AddToRoleAsync(adminUser,"Admin");
-            }
+            var adminUser = new User { UserName = adminData.Username, FirstName = adminData.FirstName, LastName = adminData.LastName, Email = adminData.Email };
+            var createResult = await userManager.CreateAsync(adminUser, adminData.Password);
+            if (!createResult.Succeeded) return;
+
+            await userManager.AddToRoleAsync(adminUser, "Admin");
         }
     }
 }

@@ -1,0 +1,46 @@
+@model List<JobBoardPlatfomr.Services.OutPutDtos.AppDtoForCustomer>
+@{
+    ViewData["Title"] = "My Applications";
+}
+
+<div class="page-header d-flex justify-content-between align-items-center mb-4">
+    <h4><i class="bi bi-send me-2 text-primary"></i>My Applications</h4>
+    <span class="badge text-bg-primary">@Model.Count() applications</span>
+</div>
+
+@if (!Model.Any())
+{
+    <div class="card shadow-sm">
+        <div class="card-body text-center py-5">
+            <i class="bi bi-send" style="font-size:3rem; color:#cbd5e1;"></i>
+            <h5 class="mt-3">No applications yet</h5>
+            <p class="text-muted mb-3">Browse the latest jobs and apply for opportunities.</p>
+            <a asp-controller="Home" asp-action="Index" class="btn btn-primary rounded-pill">Browse Jobs</a>
+        </div>
+    </div>
+}
+else
+{
+    <div class="row g-3">
+        @foreach (var app in Model)
+        {
+            <div class="col-md-6 col-lg-4">
+                <div class="card job-card h-100">
+                    <div class="card-body d-flex flex-column">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <span class="badge text-bg-light text-muted"><i class="bi bi-building me-1"></i>@app.CompanyName</span>
+                            <i class="bi bi-send-fill text-primary"></i>
+                        </div>
+                        <h5 class="card-title fw-bold mb-2">@app.JobAdTitle</h5>
+                        <div class="mt-auto d-flex gap-2 pt-3">
+                            <a asp-controller="JobSeeker" asp-action="ApplicationDetail" asp-route-id="@app.AppId" class="btn btn-outline-primary btn-sm rounded-pill flex-grow-1">Detail</a>
+                            <form method="post" asp-controller="JobSeeker" asp-action="Cancel" asp-route-appId="@app.AppId" class="d-inline" onsubmit="return confirm('Cancel this application?');">
+                                <button type="submit" class="btn btn-outline-danger btn-sm rounded-pill">Cancel</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

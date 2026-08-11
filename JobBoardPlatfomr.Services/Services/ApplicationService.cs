@@ -99,6 +99,7 @@ namespace JobBoardPlatfomr.Services.Services
              status = app.Status.ToString(),
              SubmitedAt = app.CreatedAt,
              Note = app.NoteWritenByUser,
+             ResumeId = app.User.ResumeId,
             };
         }
         public async Task<string> ChangeApplicationStatusAsync(ChangeAppStatusCommand command)
@@ -180,7 +181,7 @@ namespace JobBoardPlatfomr.Services.Services
         private async Task<bool> IsAdmin(Guid requesterid)
         {
             var user = await _unitofWork.userManager.FindByIdAsync(requesterid.ToString());
-            return await _unitofWork.userManager.IsInRoleAsync(user, "Admin");
+            return user != null && await _unitofWork.userManager.IsInRoleAsync(user, "Admin");
         }
 
         public async Task<string> CreateApplicationAsync(CreateAppCommand cmd)
@@ -246,7 +247,7 @@ namespace JobBoardPlatfomr.Services.Services
                     throw new PermisionException("This user does not belong to you.", "UserApplication-403");
                 }
             }
-            return new AppDetailForJobSeeker(app.JobAdId,app.Id,app.Status.ToString(),app.ReviewedAt,app.CreatedAt,app.NoteWritenByUser);
+            return new AppDetailForJobSeeker(app.JobAdId,app.Id,app.Status.ToString(),app.ReviewedAt,app.CreatedAt,app.NoteWritenByUser,app.User.ResumeId);
         }
         public async Task<string> CancellMyApp(Guid requesterId,Guid appId)
         {
@@ -283,7 +284,7 @@ namespace JobBoardPlatfomr.Services.Services
             }
             if(! await IsAdmin(requesterId))
             {
-                if(app.JObAd.Company.UserId != requesterId)
+                if(app.UserId != requesterId && app.JObAd.Company.UserId != requesterId)
                 {
                     throw new PermisionException("this Application Resume does not blong to you and you cant see that","resume-403");
                 }

@@ -63,16 +63,16 @@ namespace JobBoardPlatfomr.Services.Services
                 return company.Id;
 
             }
-            catch (BaseException ex)
+            catch (BaseException)
             {
 
                 await _unitofwork.RollbackTransactionAsync();
-                throw new BaseException("error in creating Company", "company-400", ex);
+                throw;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 await _unitofwork.RollbackTransactionAsync();
-                throw new Exception("error in creating Company",ex);
+                throw;
             }
         }
 
@@ -175,26 +175,26 @@ namespace JobBoardPlatfomr.Services.Services
                 await _unitofwork.CommitTransactionAsync();
                 return AttachId;
             }
-            catch (NotFoundException ex)
+            catch (NotFoundException)
             {
                 await _unitofwork.RollbackTransactionAsync();
-                throw ex;
+                throw;
             }
-            catch (PermisionException ex)
+            catch (PermisionException)
             {
                 await _unitofwork.RollbackTransactionAsync();
-                throw ex;
+                throw;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 await _unitofwork.RollbackTransactionAsync();
-                throw ex;
+                throw;
             }
         }
         private async Task<bool> IsAdmin(Guid requesterid)
         {
             var user = await _unitofwork.userManager.FindByIdAsync(requesterid.ToString());
-            return await _unitofwork.userManager.IsInRoleAsync(user, "Admin");
+            return user != null && await _unitofwork.userManager.IsInRoleAsync(user, "Admin");
         }
 
 

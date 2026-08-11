@@ -1,0 +1,79 @@
+@model JobBoardPlatfomr.Services.OutPutDtos.DetailAppDto
+@{
+    ViewData["Title"] = "Application Detail";
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-7">
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+                <div class="d-flex align-items-center gap-3 mb-4">
+                    <div class="avatar" style="width:56px; height:56px; font-size:1.3rem;">
+                        @(Model.FirstName?.FirstOrDefault().ToString() ?? "?")@(Model.LastName?.FirstOrDefault().ToString())
+                    </div>
+                    <div>
+                        <h4 class="fw-bold mb-0">Application by @Model.FirstName @Model.LastName</h4>
+                        <span class="text-muted">Submitted @Model.SubmitedAt.ToString("yyyy-MM-dd HH:mm")</span>
+                    </div>
+                </div>
+
+                @if (Model.ResumeId.HasValue)
+                {
+                    <div class="mb-4">
+                        <a asp-controller="Employer" asp-action="DownloadResume" asp-route-appId="@Model.AppId"
+                           class="btn btn-primary rounded-pill">
+                            <i class="bi bi-download me-1"></i>Download Resume
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-light border small mb-4">
+                        <i class="bi bi-info-circle me-2"></i>This applicant hasn't uploaded a resume.
+                    </div>
+                }
+
+                <dl class="row mb-0">
+                    <dt class="col-sm-4 text-muted">Email</dt>
+                    <dd class="col-sm-8">@(Model.Email ?? "-")</dd>
+                    <dt class="col-sm-4 text-muted">Phone</dt>
+                    <dd class="col-sm-8">@(Model.PhoneNumber ?? "-")</dd>
+                    <dt class="col-sm-4 text-muted">Submitted At</dt>
+                    <dd class="col-sm-8">@Model.SubmitedAt.ToString("yyyy-MM-dd HH:mm")</dd>
+                    <dt class="col-sm-4 text-muted">Status</dt>
+                    <dd class="col-sm-8">
+                        <span class="badge text-bg-@(Model.status == "Accepted" ? "success" : Model.status == "Rejected" ? "danger" : Model.status == "Canceled" ? "secondary" : "primary")">
+                            @Model.status
+                        </span>
+                    </dd>
+                    <dt class="col-sm-4 text-muted">Note</dt>
+                    <dd class="col-sm-8">@(Model.Note ?? "-")</dd>
+                </dl>
+
+                <hr />
+                <h5 class="fw-bold mb-3"><i class="bi bi-arrow-repeat me-2 text-primary"></i>Change Status</h5>
+                <form method="post" asp-controller="Employer" asp-action="ChangeAppStatus" class="row g-2">
+                    <input type="hidden" name="appId" value="@Model.AppId" />
+                    <input type="hidden" name="jobAdId" value="@ViewData["JobAdId"]" />
+                    <div class="col-auto flex-grow-1">
+                        <select name="status" class="form-select">
+                            <option value="InReview">In Review</option>
+                            <option value="Interview">Interview</option>
+                            <option value="Accepted">Accepted</option>
+                            <option value="Rejected">Rejected</option>
+                        </select>
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-primary rounded-pill px-4">Update</button>
+                    </div>
+                </form>
+
+                <div class="mt-4">
+                    <a asp-controller="Employer" asp-action="Applications" asp-route-jobAdId="@ViewData["JobAdId"]" class="btn btn-secondary rounded-pill">
+                        <i class="bi bi-arrow-left me-1"></i>Back
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

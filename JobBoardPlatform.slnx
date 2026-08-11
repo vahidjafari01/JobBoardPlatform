@@ -9,6 +9,7 @@
     <Project Path="JobBoardPlatform.Infrustructure/JobBoardPlatform.Infrustructure.csproj" />
   </Folder>
   <Folder Name="/Presentation/">
+    <Project Path="JobBoardPlatform.Mvc/JobBoardPlatform.Mvc.csproj" />
     <Project Path="JobBoardPlatform.Presentation/JobBoardPlatform.Presentation.csproj" />
   </Folder>
 </Solution>

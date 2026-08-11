@@ -1,0 +1,48 @@
+@model List<JobBoardPlatform.Domain.Users.UserDto>
+@{
+    ViewData["Title"] = "Job Seekers";
+}
+
+<div class="page-header d-flex justify-content-between align-items-center mb-4">
+    <h4><i class="bi bi-people me-2 text-primary"></i>Job Seekers</h4>
+    <span class="badge text-bg-primary">@Model.Count() users</span>
+</div>
+
+<div class="table-card">
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="avatar" style="width:38px; height:38px; font-size:.9rem;">
+                                    <i class="bi bi-person"></i>
+                                </div>
+                                <span class="fw-semibold">@user.Username</span>
+                            </div>
+                        </td>
+                        <td class="text-muted">@user.Email</td>
+                        <td class="text-end" style="white-space:nowrap;">
+                            <a asp-controller="Admin" asp-action="JobSeekerDetail" asp-route-id="@user.UserId" class="btn btn-sm btn-outline-primary rounded-pill">Detail</a>
+                            <form method="post" asp-controller="Admin" asp-action="DeactivateUser" asp-route-userId="@user.UserId" class="d-inline">
+                                <button type="submit" class="btn btn-sm btn-outline-warning rounded-pill">Deactivate</button>
+                            </form>
+                            <form method="post" asp-controller="Admin" asp-action="ActivateUser" asp-route-userId="@user.UserId" class="d-inline">
+                                <button type="submit" class="btn btn-sm btn-outline-success rounded-pill">Activate</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

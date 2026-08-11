@@ -1,0 +1,17 @@
+@{
+    ViewData["Title"] = "Error";
+    var errorCode = ViewData["ErrorCode"]?.ToString() ?? "500";
+    var errorMessage = ViewData["ErrorMessage"]?.ToString() ?? "Something went wrong. Please try again.";
+}
+
+<div class="card shadow-sm mx-auto text-center" style="max-width: 480px;">
+    <div class="card-body p-5">
+        <div class="mx-auto mb-3" style="width:84px; height:84px; border-radius:50%; background:#fee2e2; display:grid; place-items:center;">
+            <i class="bi bi-exclamation-triangle" style="font-size:2.5rem; color:#dc2626;"></i>
+        </div>
+        <h3 class="fw-bold mb-2">Something went wrong</h3>
+        <p class="fw-bold text-muted mb-1">Error @errorCode</p>
+        <p class="text-muted mb-4">@errorMessage</p>
+        <a asp-controller="Home" asp-action="Index" class="btn btn-primary rounded-pill px-4">Back to Home</a>
+    </div>
+</div>

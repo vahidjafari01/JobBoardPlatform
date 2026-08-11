@@ -1,0 +1,222 @@
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\JobBoardPlatform.Mvc.csproj.AssemblyReference.cache
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\rpswa.dswa.cache.json
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\JobBoardPlatform.Mvc.GeneratedMSBuildEditorConfig.editorconfig
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\JobBoardPlatform.Mvc.AssemblyInfoInputs.cache
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\JobBoardPlatform.Mvc.AssemblyInfo.cs
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\JobBoardPlatform.Mvc.csproj.CoreCompileInputs.cache
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\JobBoardPlatform.Mvc.MvcApplicationPartsAssemblyInfo.cache
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\JobBoardPlatform.Mvc.RazorAssemblyInfo.cache
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\JobBoardPlatform.Mvc.RazorAssemblyInfo.cs
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\JobBoardPlatform.Mvc.sourcelink.json
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\appsettings.json
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\JobBoardPlatform.Mvc.staticwebassets.endpoints.json
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\JobBoardPlatform.Mvc.exe
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\JobBoardPlatform.Mvc.deps.json
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\JobBoardPlatform.Mvc.runtimeconfig.json
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\JobBoardPlatform.Mvc.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\JobBoardPlatform.Mvc.pdb
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Azure.Core.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Azure.Identity.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\BouncyCastle.Cryptography.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Dapper.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\MailKit.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.Bcl.AsyncInterfaces.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.Data.SqlClient.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.Extensions.Caching.Abstractions.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.Extensions.Caching.Memory.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.Extensions.Identity.Core.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.Extensions.Identity.Stores.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.Extensions.Logging.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.Extensions.Options.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.Extensions.Primitives.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.Identity.Client.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.Identity.Client.Extensions.Msal.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.IdentityModel.Abstractions.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.IdentityModel.Logging.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.IdentityModel.Tokens.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.SqlServer.Server.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.Win32.SystemEvents.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\MimeKit.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\System.ClientModel.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\System.Configuration.ConfigurationManager.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\System.Drawing.Common.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\System.IdentityModel.Tokens.Jwt.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\System.Memory.Data.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\System.Runtime.Caching.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\System.Security.Cryptography.ProtectedData.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\System.Security.Permissions.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\System.Windows.Extensions.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\runtimes\unix\lib\net6.0\Microsoft.Data.SqlClient.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\runtimes\win\lib\net6.0\Microsoft.Data.SqlClient.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\JobBoardPlatfomr.Services.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\JobBoardPlatform.Domain.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\JobBoardPlatform.Infrustructure.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\JobBoardPlatfomr.Services.pdb
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\JobBoardPlatform.Infrustructure.pdb
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\JobBoardPlatform.Domain.pdb
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\rjimswa.dswa.cache.json
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\rjsmrazor.dswa.cache.json
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\rjsmcshtml.dswa.cache.json
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\scopedcss\bundle\JobBoardPlatform.Mvc.styles.css
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\staticwebassets.build.json
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\staticwebassets.build.json.cache
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\staticwebassets.development.json
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\staticwebassets.build.endpoints.json
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\swae.build.ex.cache
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\JobBoard.E1B9F012.Up2Date
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\JobBoardPlatform.Mvc.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\refint\JobBoardPlatform.Mvc.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\JobBoardPlatform.Mvc.pdb
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\JobBoardPlatform.Mvc.genruntimeconfig.cache
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\ref\JobBoardPlatform.Mvc.dll
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\JobBoardPlatform.Mvc.staticwebassets.runtime.json
+C:\maktab\HWs\11\New folder\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\compressed\30fh1hw3lf-{0}-ufz1wf3n9r-ufz1wf3n9r.gz
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\appsettings.json
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\JobBoardPlatform.Mvc.staticwebassets.endpoints.json
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\JobBoardPlatform.Mvc.staticwebassets.runtime.json
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\JobBoardPlatform.Mvc.exe
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\JobBoardPlatform.Mvc.deps.json
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\JobBoardPlatform.Mvc.runtimeconfig.json
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\JobBoardPlatform.Mvc.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\JobBoardPlatform.Mvc.pdb
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Azure.Core.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Azure.Identity.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\BouncyCastle.Cryptography.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Dapper.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\MailKit.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.Data.SqlClient.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.Extensions.Identity.Stores.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.Extensions.Logging.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.Extensions.Options.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.Extensions.Primitives.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.Identity.Client.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.Identity.Client.Extensions.Msal.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.SqlServer.Server.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\MimeKit.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\System.ClientModel.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\System.Configuration.ConfigurationManager.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\System.Drawing.Common.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\System.Formats.Asn1.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\System.Memory.Data.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\System.Runtime.Caching.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\System.Security.Permissions.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\System.Text.Json.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\System.Windows.Extensions.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\runtimes\unix\lib\net6.0\Microsoft.Data.SqlClient.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\runtimes\win\lib\net6.0\Microsoft.Data.SqlClient.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\JobBoardPlatfomr.Services.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\JobBoardPlatform.Domain.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\JobBoardPlatform.Infrustructure.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\JobBoardPlatfomr.Services.pdb
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\JobBoardPlatform.Infrustructure.pdb
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\JobBoardPlatform.Domain.pdb
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\JobBoardPlatform.Mvc.csproj.AssemblyReference.cache
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\rpswa.dswa.cache.json
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\JobBoardPlatform.Mvc.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\JobBoardPlatform.Mvc.AssemblyInfoInputs.cache
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\JobBoardPlatform.Mvc.AssemblyInfo.cs
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\JobBoardPlatform.Mvc.csproj.CoreCompileInputs.cache
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\JobBoardPlatform.Mvc.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\JobBoardPlatform.Mvc.RazorAssemblyInfo.cache
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\JobBoardPlatform.Mvc.RazorAssemblyInfo.cs
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\JobBoardPlatform.Mvc.sourcelink.json
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\rjimswa.dswa.cache.json
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\rjsmrazor.dswa.cache.json
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\rjsmcshtml.dswa.cache.json
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\scopedcss\bundle\JobBoardPlatform.Mvc.styles.css
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\compressed\30fh1hw3lf-{0}-ufz1wf3n9r-ufz1wf3n9r.gz
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\staticwebassets.build.json
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\staticwebassets.build.json.cache
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\staticwebassets.development.json
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\staticwebassets.build.endpoints.json
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\swae.build.ex.cache
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\JobBoard.E1B9F012.Up2Date
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\JobBoardPlatform.Mvc.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\refint\JobBoardPlatform.Mvc.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\JobBoardPlatform.Mvc.pdb
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\JobBoardPlatform.Mvc.genruntimeconfig.cache
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\obj\Debug\net9.0\ref\JobBoardPlatform.Mvc.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Microsoft.Extensions.Caching.StackExchangeRedis.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Pipelines.Sockets.Unofficial.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\StackExchange.Redis.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Hangfire.AspNetCore.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Hangfire.Core.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Hangfire.NetCore.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Hangfire.SqlServer.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\Newtonsoft.Json.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\ca\Hangfire.Core.resources.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\de\Hangfire.Core.resources.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\es\Hangfire.Core.resources.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\fa\Hangfire.Core.resources.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\fr\Hangfire.Core.resources.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\nb\Hangfire.Core.resources.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\nl\Hangfire.Core.resources.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\pt-BR\Hangfire.Core.resources.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\pt-PT\Hangfire.Core.resources.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\pt\Hangfire.Core.resources.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\ru\Hangfire.Core.resources.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\sv\Hangfire.Core.resources.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\tr-TR\Hangfire.Core.resources.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\zh-TW\Hangfire.Core.resources.dll
+C:\Users\Asus\Desktop\JobBoardPlatform\JobBoardPlatform.Mvc\bin\Debug\net9.0\zh\Hangfire.Core.resources.dll

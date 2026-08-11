@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "fxRw7hQzqmI=",
+  "dgSpecHash": "AxmtSPKsTeE=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Asus\\Desktop\\c#test\\JobBoardPlatform\\JobBoardPlatform.Domain\\JobBoardPlatform.Domain.csproj",
+  "projectFilePath": "C:\\Users\\Asus\\Desktop\\JobBoardPlatform\\JobBoardPlatform.Domain\\JobBoardPlatform.Domain.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Asus\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\9.0.16\\microsoft.aspnetcore.cryptography.internal.9.0.16.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\9.0.16\\microsoft.aspnetcore.cryptography.keyderivation.9.0.16.nupkg.sha512",
@@ -16,15 +16,5 @@
     "C:\\Users\\Asus\\.nuget\\packages\\microsoft.extensions.options\\9.0.16\\microsoft.extensions.options.9.0.16.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\microsoft.extensions.primitives\\9.0.16\\microsoft.extensions.primitives.9.0.16.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1900",
-      "level": "Warning",
-      "message": "Error occurred while getting package vulnerability data: Unable to load the service index for source https://api.nuget.org/v3/index.json.",
-      "projectPath": "C:\\Users\\Asus\\Desktop\\c#test\\JobBoardPlatform\\JobBoardPlatform.Domain\\JobBoardPlatform.Domain.csproj",
-      "warningLevel": 1,
-      "filePath": "C:\\Users\\Asus\\Desktop\\c#test\\JobBoardPlatform\\JobBoardPlatform.Domain\\JobBoardPlatform.Domain.csproj",
-      "targetGraphs": []
-    }
-  ]
+  "logs": []
 }

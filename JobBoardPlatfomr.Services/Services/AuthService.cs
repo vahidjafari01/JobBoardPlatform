@@ -42,6 +42,9 @@ namespace JobBoardPlatfomr.Services.Services
             if (user is null)
                 throw new BadRequestException("the username or password is incorrect");
 
+            if (user.IsDeleted || !user.IsActive)
+                throw new BadRequestException("your account is not active");
+
             var isPasswordValid = await _userManager.CheckPasswordAsync(user, dto.Password);
 
             if (!isPasswordValid)
@@ -56,7 +59,10 @@ namespace JobBoardPlatfomr.Services.Services
             if (roles.Contains("Employer"))
             {
                 var company = await _unitOfWork.CompanyRepo.GetByUserId(user.Id);
-                companyId = company.Id;
+                if (company != null)
+                {
+                    companyId = company.Id;
+                }
             }
 
 
@@ -93,6 +99,8 @@ namespace JobBoardPlatfomr.Services.Services
 
 
                 var roleResult = await _userManager.AddToRoleAsync(user, "JobSeeker");
+                if (!roleResult.Succeeded)
+                    throw new BadRequestException("eror in assigning role");
 
                 var roles = await _userManager.GetRolesAsync(user);
 
@@ -103,10 +111,10 @@ namespace JobBoardPlatfomr.Services.Services
                 await _unitOfWork.CommitTransactionAsync();
 
                 return new AuthResponseDto(token, refreshToken, $"welcome {user.FirstName + " " + user.LastName}", user.Id,null);
-            }catch(Exception ex)
+            }catch(Exception)
             {
                 await _unitOfWork.RollbackTransactionAsync();
-                throw new Exception("Eror in Registering",ex);
+                throw;
             }
            
 
@@ -120,6 +128,8 @@ namespace JobBoardPlatfomr.Services.Services
 
 
                 var user = await _userManager.FindByIdAsync(command.UserId.ToString());
+                if (user == null)
+                    throw new NotFoundException("user not found", "user-404");
 
                 var roles = await _userManager.GetRolesAsync(user);
 
@@ -130,10 +140,10 @@ namespace JobBoardPlatfomr.Services.Services
                 return new AuthResponseDto(token, refreshToken, $"welcome {user.FirstName + " " + user.LastName}", user.Id, companyId);
 
             }
-            catch (Exception ex) 
+            catch (Exception)
             {
                 await _unitOfWork.RollbackTransactionAsync();
-                throw new Exception("Eror in company Registering",ex);
+                throw;
             }
         }
         public async Task<RefreshDto> Refresh(string RefreshToken,Guid userId)

@@ -1,4 +1,5 @@
-﻿using JobBoardPlatfomr.Services.IServices;
+﻿using Hangfire;
+using JobBoardPlatfomr.Services.IServices;
 using JobBoardPlatfomr.Services.OutPutDtos;
 using JobBoardPlatfomr.Services.Services;
 using JobBoardPlatform.Domain.Abstractions;
@@ -113,17 +114,39 @@ builder.Services.AddScoped<IAttachService, AttachService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IAdminService,AdminService>();
 builder.Services.AddScoped<IEmailSender,EmailSender>();
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = builder.Configuration.GetConnectionString("Redis");
+    options.InstanceName = nameof(JobBoardPlatform);
+});
 builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection(EmailSettings.SectionName));
 
 builder.Services.AddScoped<IApplicationService, ApplicationService>();
+builder.Services.AddScoped<IProvinceService, ProvinseService>();
+builder.Services.AddScoped<ICityService, CityService>();
 builder.Services.AddScoped<GlobalExceptionHandlerMiddleware>();
+builder.Services.AddHangfire(configuration => configuration
+    .SetDataCompatibilityLevel(CompatibilityLevel.Version_180)
+    .UseSimpleAssemblyNameTypeSerializer()
+    .UseRecommendedSerializerSettings()
+    .UseSqlServerStorage(builder.Configuration.GetConnectionString("Sql"), new Hangfire.SqlServer.SqlServerStorageOptions
+    {
+        CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
+        SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
+        QueuePollInterval = TimeSpan.Zero,
+        UseRecommendedIsolationLevel = true,
+        DisableGlobalLocks = true // برای پرفورمنس بهتر در SQL Server
+    }));
+builder.Services.AddHangfireServer();
+
+
 
 
 
 
 
 var app = builder.Build();
-//await app.SeedDataBaseAsync();
+await app.SeedDataBaseAsync();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -131,6 +154,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(c =>
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "Auth Edu API v1"));
+}
+app.UseHangfireDashboard();
+using (var scope = app.Services.CreateScope())
+{
+    var recurringJobManager = scope.ServiceProvider.GetRequiredService<IRecurringJobManager>();
+    recurringJobManager.AddOrUpdate<IJobAdServices>(
+        "cleanup-expired-jobs",
+        service => service.UpdateExpiredJobs(),
+        Cron.Daily(1));
 }
 
 

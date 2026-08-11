@@ -1,0 +1,66 @@
+@model List<JobBoardPlatfomr.Domain.Abstractions.EmployerDto>
+@{
+    ViewData["Title"] = "Employers";
+}
+
+<div class="page-header d-flex justify-content-between align-items-center mb-4">
+    <h4><i class="bi bi-building me-2 text-primary"></i>Employers</h4>
+    <span class="badge text-bg-primary">@Model.Count() companies</span>
+</div>
+
+<div class="table-card">
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Registered</th>
+                    <th>Approved</th>
+                    <th class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var emp in Model)
+                {
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="avatar" style="width:38px; height:38px; font-size:.9rem;">
+                                    @(emp.FirstName?.FirstOrDefault().ToString() ?? "?")@(emp.LastName?.FirstOrDefault().ToString())
+                                </div>
+                                <div>
+                                    <div class="fw-semibold">@emp.FirstName @emp.LastName</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="text-muted">@emp.CreatedAt.ToString("yyyy-MM-dd")</td>
+                        <td>
+                            @if (emp.IsApproved)
+                            {
+                                <span class="badge text-bg-success"><i class="bi bi-check-circle me-1"></i>Approved</span>
+                            }
+                            else
+                            {
+                                <span class="badge text-bg-warning"><i class="bi bi-clock me-1"></i>Pending</span>
+                            }
+                        </td>
+                        <td class="text-end">
+                            @if (!emp.IsApproved)
+                            {
+                                <form method="post" asp-controller="Admin" asp-action="ApproveCompany" asp-route-companyId="@emp.CompanyId" class="d-inline">
+                                    <button type="submit" class="btn btn-sm btn-success rounded-pill"><i class="bi bi-check-lg me-1"></i>Approve</button>
+                                </form>
+                            }
+                            else
+                            {
+                                <form method="post" asp-controller="Admin" asp-action="RejectCompany" asp-route-companyId="@emp.CompanyId" class="d-inline">
+                                    <button type="submit" class="btn btn-sm btn-danger rounded-pill"><i class="bi bi-x-lg me-1"></i>Revoke</button>
+                                </form>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

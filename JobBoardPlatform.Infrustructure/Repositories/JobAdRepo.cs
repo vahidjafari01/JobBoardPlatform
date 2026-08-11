@@ -21,7 +21,7 @@ namespace JobBoardPlatform.Infrustructure.Repositories
         public async Task<Company?> GetCompanyWithJobAdIdAsync(Guid jobadId)
         {
             var a = await _context.JobAds.Include(j => j.Company).Include(j => j.Category).FirstOrDefaultAsync(j => j.Id == jobadId);
-            return a.Company;
+            return a?.Company;
         }
         public async Task<List<JobAd>> GetJObAdsPaging(int take,int skip,Expression<Func<JobAd,bool>> filter)
         {
@@ -30,7 +30,7 @@ namespace JobBoardPlatform.Infrustructure.Repositories
         public async Task<List<Application>> GetApplicationsJobAd(Guid jobadId) {
 
             var jobad = await _context.JobAds.Include(j => j.Applications).ThenInclude(a => a.User).FirstOrDefaultAsync(j => j.Id == jobadId);
-            return jobad.Applications ?? new List<Application>();
+            return jobad?.Applications ?? new List<Application>();
         
         }
         public async Task<JobAd?> GetJobAdDetail(Guid jobAdId)
@@ -107,6 +107,12 @@ namespace JobBoardPlatform.Infrustructure.Repositories
         public async Task<JobAd?> GetJobAdWithCompanyAsync(Guid jobAdid)
         {
             return await _context.JobAds.Include(j => j.Company).FirstOrDefaultAsync(j => j.Id == jobAdid);
+        }
+
+        public async Task UpdateExpiredJobs()
+        {
+            await _context.JobAds.Where(j => j.IsFeatured && j.FeaturedUntil < DateTime.UtcNow).ExecuteUpdateAsync(s => s.SetProperty(j => j.IsFeatured ,false));
+            await _context.JobAds.Where(j => j.CreatedAt.AddDays(30) < DateTime.UtcNow).ExecuteUpdateAsync(s => s.SetProperty(j => j.Status ,JobAdStatus.Closed));
         }
     }
 }
