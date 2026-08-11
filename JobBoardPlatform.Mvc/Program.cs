@@ -6,6 +6,7 @@ using JobBoardPlatform.Domain.Abstractions;
 using JobBoardPlatform.Domain.Users;
 using JobBoardPlatform.Infrustructure;
 using JobBoardPlatform.Mvc;
+using JobBoardPlatform.Mvc.Filters;
 using JobBoardPlatform.Mvc.Middlewares;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
@@ -107,6 +108,8 @@ app.UseStaticFiles();
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseHangfireDashboard("/hangfire", new DashboardOptions { Authorization = new[] { new HangfireFilter() } });
+
 
 app.MapControllerRoute(
     name: "default",
