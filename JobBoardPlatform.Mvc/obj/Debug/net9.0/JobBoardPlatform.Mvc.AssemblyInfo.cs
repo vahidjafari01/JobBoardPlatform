@@ -11,10 +11,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("b3567e46-4c44-4826-a808-d2e45f2bc222")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("JobBoardPlatform.Mvc")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+002a1057e7daad7fcca9102a5d1596d39ed70975")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1a82252c487f1fbaa91e524939c2b0f5aa690e67")]
 [assembly: System.Reflection.AssemblyProductAttribute("JobBoardPlatform.Mvc")]
 [assembly: System.Reflection.AssemblyTitleAttribute("JobBoardPlatform.Mvc")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

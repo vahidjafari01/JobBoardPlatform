@@ -9,8 +9,8 @@ namespace JobBoardPlatform.Domain.Abstractions
 {
     public abstract class BaseEntity : IEntity
     {
-        public DateTime CreatedAt { get; set; }
-        public DateTime ModifiedAt { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime ModifiedAt { get; set; } = DateTime.UtcNow;
 
         [Key]
         public Guid Id { get; set; }
